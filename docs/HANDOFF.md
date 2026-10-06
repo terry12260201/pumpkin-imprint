@@ -85,4 +85,4 @@ node algo.js  "<開發機>/pumpkin-texture-ripper/index.html"   # 五種無縫�
 
 ## 9. 公開版 repo（2026-09-26 起）
 
-對外可用的版本另放公開 repo **`terry12260201/pumpkin-imprint`**（GitHub Pages：https://terry12260201.github.io/pumpkin-imprint/ ），結構：根目錄 `index.html`＋圖文 `README.md`、`docs/img/`（README 截圖，`tests/readme_shots.js` 可重產）、`docs/HANDOFF.md`（本文）、`docs/DEVELOPMENT.md`（＝SKILL.md 去掉 frontmatter）、`tests/`。**改工具後要同步四處**：開發副本 → 本機 skill → vault → `pumpkin-skills`（私有）→ `pumpkin-imprint`（公開，Pages 立即生效）。公開 repo 不放任何內部路徑以外的敏感資訊；HANDOFF 內的 `<開發機>\...` 路徑只對 PC-02 有意義。
+對外可用的版本另放公開 repo **`terry12260201/pumpkin-imprint`**（GitHub Pages：https://terry12260201.github.io/pumpkin-imprint/ ），結構：根目錄 `index.html`＋圖文 `README.md`、`docs/readme/`（README 的 Banner 與截圖，由 pumpkin-gh-writer skill 產生）、`docs/HANDOFF.md`（本文）、`docs/DEVELOPMENT.md`（＝SKILL.md 去掉 frontmatter）、`tests/`。**改工具後要同步四處**：開發副本 → 本機 skill → vault → `pumpkin-skills`（私有）→ `pumpkin-imprint`（公開，Pages 立即生效）。公開 repo 不放任何內部路徑以外的敏感資訊；HANDOFF 內的 `<開發機>\...` 路徑只對 PC-02 有意義。
