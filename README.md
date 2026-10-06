@@ -3,6 +3,10 @@
   <img src="docs/readme/banner-light.svg" width="100%" alt="南瓜拓印 Pumpkin Imprint：把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR">
 </picture>
 
+<h1 align="center">🎃 南瓜拓印 · Pumpkin Imprint</h1>
+
+<p align="center"><b>把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR</b></p>
+
 <p align="center">
   <a href="https://terry12260201.github.io/pumpkin-imprint/"><img src="https://img.shields.io/badge/▶%20線上試用-免安裝-FDC302?style=flat-square&labelColor=161415" alt="線上試用"></a>
   <img src="https://img.shields.io/badge/形式-單一%20HTML%20·%20可離線-F5F5F5?style=flat-square&labelColor=161415" alt="形式：單一 HTML、可離線">
