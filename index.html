@@ -212,6 +212,7 @@ canvas#stage.pan{cursor:grab}
 canvas#stage.panning{cursor:grabbing}
 #dropHint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:rgba(255,255,255,.55);pointer-events:none;text-align:center;font-size:14px}
 #dropHint b{color:#fff;font-size:20px;font-weight:600}
+#dropHint .btn{pointer-events:auto;margin:4px 0}
 #dropHint .kbd{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2);background:rgba(255,255,255,.06)}
 #center.dragover #canvasHolder::after{content:"放開以匯入";position:absolute;inset:12px;border:2px dashed var(--ig-gold);border-radius:var(--ig-r-card);display:grid;place-items:center;color:var(--ig-gold);font-size:18px;background:rgba(253,195,2,.08);pointer-events:none}
 
@@ -230,6 +231,21 @@ canvas#tile{position:absolute;top:0;left:0;display:block;cursor:crosshair}
 #scoreLabel{font:500 11px/1 var(--ig-font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ig-ink-soft)}
 .mini{font:400 11px/1.5 var(--ig-font-mono);color:var(--ig-ink-soft)}
 
+/* ===== 右欄拓印清單 ===== */
+#ripGal{padding:10px 12px 12px;border-bottom:1px solid var(--ig-ink-hairline);flex:none}
+#ripGal h2{margin:0 0 8px;font:500 12px/1 var(--ig-font-mono);letter-spacing:.14em;color:var(--ig-ink-soft);display:flex;align-items:center;gap:6px}
+#ripGal h2 .btn{margin-left:auto;letter-spacing:0}
+#rgList{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:212px;overflow-y:auto;padding:2px}
+#rgList .empty{grid-column:1/-1;font-size:12px;color:var(--ig-ink-readable);background:var(--ig-ink-wash);border-radius:var(--ig-r-sm);padding:8px 10px;line-height:1.6}
+.rg{position:relative;border:1px solid var(--ig-ink-hairline);border-radius:var(--ig-r-sm);overflow:hidden;cursor:pointer;background:var(--ig-card);transition:border-color var(--ig-fast) var(--ig-ease),transform var(--ig-base) var(--ig-ease)}
+.rg:hover{transform:translateY(-1px);border-color:var(--ig-ink-faint)}
+.rg.sel{border-color:var(--ig-gold);box-shadow:var(--ig-ring-gold)}
+.rg .im{aspect-ratio:1;display:grid;place-items:center;background:var(--ig-ink-wash) repeating-conic-gradient(var(--ig-ink-wash) 0 25%,transparent 0 50%) 50%/10px 10px}
+.rg .im img{max-width:100%;max-height:100%;display:block}
+.rg .im span{font-size:11px;color:var(--ig-ink-soft)}
+.rg .nm{font:500 10px/1.3 var(--ig-font-mono);padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ig-ink-readable)}
+.rg .x{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;border:0;padding:0;background:rgba(22,20,21,.72);color:#fff;font-size:10px;cursor:pointer;display:none;place-items:center}
+.rg:hover .x{display:grid}
 /* ===== 右欄 tabs ===== */
 #tabs{display:flex;flex:none;border-bottom:1px solid var(--ig-ink-hairline);background:var(--ig-card-alt);position:sticky;top:0;z-index:2}
 #tabs button{flex:1;height:42px;border:0;background:transparent;color:var(--ig-ink-soft);font-size:13px;cursor:pointer;border-bottom:2px solid transparent;transition:color var(--ig-fast) var(--ig-ease),border-color var(--ig-fast) var(--ig-ease)}
@@ -253,6 +269,9 @@ canvas#tile{position:absolute;top:0;left:0;display:block;cursor:crosshair}
 #atlasHolder{flex:1;position:relative;overflow:hidden;background:var(--ig-paper);min-height:80px}
 canvas#atlasView{position:absolute;left:0;top:0;cursor:default;display:block}
 canvas#atlasView.dragging{cursor:grabbing}
+.wfoot .azoom{display:inline-flex;gap:3px;align-items:center;margin-right:10px;vertical-align:middle}
+.wfoot .azoom b{min-width:44px;text-align:center;font-weight:600}
+.wfoot .azoom .btn.xs{height:22px;padding:0 7px}
 .wfoot{padding:5px 10px;font:400 11px/1.5 var(--ig-font-mono);color:var(--ig-ink-readable);border-top:1px solid var(--ig-ink-hairline);flex:none}
 #splitter{width:6px;cursor:col-resize;background:var(--ig-ink-wash);flex:none;transition:background-color var(--ig-fast) var(--ig-ease)}
 #splitter:hover{background:var(--ig-gold)}
@@ -271,6 +290,39 @@ canvas#atlasView.dragging{cursor:grabbing}
 .onb div{background:var(--ig-ink-wash);border-radius:var(--ig-r-md);padding:12px;font-size:13px;line-height:1.5}
 .onb div b{display:block;margin-bottom:4px}
 .onb div i{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ig-gold);color:var(--ig-on-gold);font:600 12px/1 var(--ig-font-mono);font-style:normal;margin-bottom:6px}
+/* ===== 教學面板 ===== */
+.modal.tut{max-width:760px;padding:20px 22px}
+.tut-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tut-head h2{margin:0}
+.tut-head .grow{flex:1}
+.tut-tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--ig-ink-hairline);margin-bottom:12px;scrollbar-width:thin}
+.tut-tabs button{flex:none;height:36px;padding:0 12px;border:0;background:transparent;color:var(--ig-ink-soft);font-size:13px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.tut-tabs button:hover{color:var(--ig-ink)}
+.tut-tabs button.active{color:var(--ig-ink);border-bottom-color:var(--ig-gold);font-weight:600}
+.tut-pane{display:none}
+.tut-pane.active{display:block}
+.tut-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.tut-list li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.6;padding:6px 8px;border-radius:var(--ig-r-sm);background:var(--ig-ink-wash)}
+.tut-list li>i{flex:none;min-width:24px;height:24px;padding:0 4px;border-radius:12px;display:inline-grid;place-items:center;font:600 11px/1 var(--ig-font-mono);font-style:normal;background:var(--ig-gold);color:var(--ig-on-gold)}
+.tut-list li>span{min-width:0}
+.tut-list.keyrows li{flex-wrap:wrap}
+.tut-list.keyrows li>span:nth-child(2){flex:1;min-width:160px}
+.tut-list .ks{display:flex;gap:4px;flex-wrap:wrap}
+.tut-list .kbd{font-size:11px}
+/* ===== 新手導覽 spotlight ===== */
+.tour{position:fixed;inset:0;z-index:61;display:none;pointer-events:none}
+.tour.show{display:block}
+.tour-spot{position:fixed;left:0;top:0;width:0;height:0;border-radius:14px;box-shadow:0 0 0 2px var(--ig-gold),0 0 0 9999px rgba(15,14,14,.58);transition:left var(--ig-base) var(--ig-ease),top var(--ig-base) var(--ig-ease),width var(--ig-base) var(--ig-ease),height var(--ig-base) var(--ig-ease);pointer-events:none}
+.tour-card{position:fixed;width:340px;max-width:calc(100vw - 32px);background:var(--ig-card);color:var(--ig-ink);border:1px solid var(--ig-ink-hairline);border-radius:var(--ig-r-card);padding:16px 18px 14px;box-shadow:var(--ig-shadow-float);pointer-events:auto}
+.tour-card h2{margin:6px 0 4px;font-size:19px;font-weight:600}
+.tour-card p{margin:0;font-size:13.5px;line-height:1.65;color:var(--ig-ink-readable)}
+.tour-step{font:500 11px/1 var(--ig-font-mono);letter-spacing:.12em;color:var(--ig-ink-soft)}
+.tour-step b{color:var(--ig-gold-deep)}
+.tour-act{margin:10px 0;padding:8px 10px;border-radius:var(--ig-r-sm);background:var(--ig-gold-wash);color:var(--ig-gold-deep);font-size:12.5px;line-height:1.55;font-weight:500}
+.tour-dots{display:flex;gap:5px;margin:0 0 10px}
+.tour-dots i{width:18px;height:4px;border-radius:2px;background:var(--ig-ink-faint)}
+.tour-dots i.on{background:var(--ig-gold)}
+@media (max-width:560px){ .modal.tut{padding:14px} .overlay{padding:10px} .tut-list li{font-size:13px} }
 #toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ig-night);color:#fff;padding:10px 16px;border-radius:var(--ig-r-pill);font-size:13px;opacity:0;pointer-events:none;transition:opacity var(--ig-base) var(--ig-ease),transform var(--ig-base) var(--ig-ease);z-index:60;box-shadow:var(--ig-shadow-float);max-width:80vw}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 #toast.err{background:var(--ig-danger)}
@@ -295,7 +347,8 @@ canvas#atlasView.dragging{cursor:grabbing}
     <button class="hbtn" onclick="saveProject()" title="存專案 JSON (Ctrl+S)"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>存檔</button>
     <button class="hbtn" onclick="document.getElementById('projInput').click()" title="開啟專案 JSON (Ctrl+O)"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>開啟</button>
     <button class="hbtn icon" id="btnTheme" title="日／夜切換" onclick="toggleTheme()"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
-    <button class="hbtn icon" title="快捷鍵 (?)" onclick="toggleOverlay('help')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg></button>
+    <button class="hbtn" id="btnTour" title="重看 4 步導覽" onclick="startTour(0)"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>教學</button>
+    <button class="hbtn icon" title="教學面板與快捷鍵 (?)" onclick="toggleOverlay('help')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg></button>
     <span class="credit">創作者：<b>南瓜</b></span>
     <div id="progress"></div>
   </header>
@@ -308,6 +361,7 @@ canvas#atlasView.dragging{cursor:grabbing}
         <div class="thumbs" id="srcList"></div>
         <div class="row">
           <button class="btn gold grow" onclick="document.getElementById('fileInput').click()">匯入照片</button>
+          <button class="btn" onclick="loadSample()" title="載入內建練習圖：斜拍的機器面板＋桶狀標籤">載入範例</button>
         </div>
         <input type="file" id="fileInput" accept="image/*,.json" multiple>
         <input type="file" id="projInput" accept=".json,application/json">
@@ -381,7 +435,7 @@ canvas#atlasView.dragging{cursor:grabbing}
             <button class="btn xs" onclick="packAtlas(false)" title="保留現有位置，只放進尚未在圖集的圖">補排</button>
             <button class="btn xs" onclick="removeFromAtlas()" title="把目前選取的圖移出圖集">移出</button>
             <button class="btn xs" onclick="exportAtlas()" title="只匯出圖集顏色 PNG ＋ UV JSON">匯出圖集</button>
-            <button class="btn xs gold" onclick="exportAtlasSet()" title="Albedo／Normal／Roughness／AO／Height 五張圖集 ＋ UV JSON">匯出材質組</button>
+            <button class="btn xs gold" id="btnExportSet" onclick="exportAtlasSet()" title="Albedo／Normal／Roughness／AO／Height 五張圖集 ＋ UV JSON">匯出材質組</button>
           </div>
           <div id="atlasHolder"><canvas id="atlasView"></canvas></div>
           <div id="atlasInfo" class="wfoot"></div>
@@ -398,7 +452,7 @@ canvas#atlasView.dragging{cursor:grabbing}
           </div>
           <div id="canvasHolder">
             <canvas id="stage" width="800" height="600"></canvas>
-            <div id="dropHint"><b>拖曳照片到這裡</b><span>或 <span class="kbd">Ctrl+V</span> 貼上截圖、按左側「匯入照片」</span><span class="mini" style="color:rgba(255,255,255,.4)">接著在照片上點 4 個角，圖就拓到左邊圖集</span></div>
+            <div id="dropHint"><b>還沒有照片</b><span>把截圖 <span class="kbd">Ctrl+V</span> 貼進來，或拖照片進來，或按「載入範例」</span><button class="btn gold" id="btnSampleEmpty" onclick="loadSample()">載入範例</button><span class="mini" style="color:rgba(255,255,255,.4)">接著在照片上點 4 個角，圖就拓到左邊圖集</span></div>
           </div>
         </section>
       </div>
@@ -434,6 +488,10 @@ canvas#atlasView.dragging{cursor:grabbing}
 
     <!-- ===== 右欄 ===== -->
     <aside id="right" class="panel">
+      <section id="ripGal">
+        <h2>拓印清單 <span id="rgCount" class="tag">0</span><button class="btn xs" onclick="exportAllZip('albedo')" title="全部拓印打包成一個 ZIP（檔名＝來源檔名_拓印名.png）">匯出全部 ZIP</button></h2>
+        <div id="rgList"></div>
+      </section>
       <div id="tabs">
         <button class="active" data-tab="seam" onclick="setTab('seam')">無縫</button>
         <button data-tab="light" onclick="setTab('light')">補光</button>
@@ -487,11 +545,19 @@ canvas#atlasView.dragging{cursor:grabbing}
             <label>隨機種子 <span class="v" id="v_seed">1</span></label>
             <input type="range" id="p_seed" data-p="seamless.seed" min="1" max="99" value="1">
           </div>
+          <div class="field seamOnly" title="無縫混合會抹掉接縫處的紋理；這支把原圖的細節（高頻）補回來">
+            <label>細節回復 <span class="v" id="v_detail">0</span></label>
+            <input type="range" id="p_detail" data-p="seamless.detail" min="0" max="100" value="0">
+          </div>
+          <div class="field seamOnly" title="局部對比：正值紋理更立體，負值更平；跟下方「整體對比」不同，不會把整張變黑變白">
+            <label>對比（局部） <span class="v" id="v_lcon">0</span></label>
+            <input type="range" id="p_lcon" data-p="seamless.lcon" min="-100" max="100" value="0">
+          </div>
         </section>
         <section class="sec seamOnly">
           <h2>調整</h2>
           <div class="field"><label>亮度 <span class="v" id="v_bri">0</span></label><input type="range" id="p_bri" data-p="seamless.bri" min="-100" max="100" value="0"></div>
-          <div class="field"><label>對比 <span class="v" id="v_con">0</span></label><input type="range" id="p_con" data-p="seamless.con" min="-100" max="100" value="0"></div>
+          <div class="field"><label>整體對比 <span class="v" id="v_con">0</span></label><input type="range" id="p_con" data-p="seamless.con" min="-100" max="100" value="0"></div>
           <div class="field"><label>細節銳化 <span class="v" id="v_sharpen">0</span></label><input type="range" id="p_sharpen" data-p="seamless.sharpen" min="0" max="100" value="0"></div>
           <button class="btn sm" onclick="resetParams('seamless')">重設此頁</button>
         </section>
@@ -559,8 +625,8 @@ canvas#atlasView.dragging{cursor:grabbing}
         </section>
         <section class="sec">
           <h2>全部</h2>
-          <button class="btn block" onclick="exportAll('albedo')">匯出全部選區貼圖</button>
-          <button class="btn block" onclick="exportAll('pbr')">匯出全部 PBR 材質組</button>
+          <button class="btn block" onclick="exportAllZip('albedo')" title="一個 ZIP，檔名＝來源檔名_拓印名.png">匯出全部拓印（ZIP）</button>
+          <button class="btn block" onclick="exportAllZip('pbr')" title="每張拓印的 5 張 PBR，打包成一個 ZIP">匯出全部 PBR 材質組（ZIP）</button>
           <button class="btn gold block" onclick="exportAtlasSet()">匯出圖集材質組（5 張 ＋ UV JSON）</button>
           <button class="btn block" onclick="exportAtlas()">只匯出圖集顏色 PNG ＋ UV JSON</button>
         </section>
@@ -578,52 +644,97 @@ canvas#atlasView.dragging{cursor:grabbing}
   </div>
 </div>
 
-<!-- 快捷鍵面板 -->
+<!-- 教學面板（? 開關）：六分頁 -->
 <div class="overlay" id="ov_help" onclick="if(event.target===this)toggleOverlay('help')">
-  <div class="modal">
-    <h2>快捷鍵</h2>
-    <p>在畫布上操作時可用；輸入框內不觸發。按 <span class="kbd">?</span> 或 <span class="kbd">Esc</span> 關閉。</p>
-    <div class="keys">
-      <div><span>貼上圖片</span><span class="kbd">Ctrl+V</span></div>
-      <div><span>切換來源圖</span><span class="kbd">Tab / Shift+Tab</span></div>
-      <div><span>新拓印框</span><span class="kbd">N</span></div>
-      <div><span>切換模式：四點／多點／矩形／橢圓／曲線</span><span class="kbd">Q P M O C</span></div>
-      <div><span>多點：收合／插入點／刪除點</span><span class="kbd">Enter 或點回起點 / Alt＋點邊 / Alt＋點頂點</span></div>
-      <div><span>刪除拓印框</span><span class="kbd">Del</span></div>
-      <div><span>圖集：搬移／縮放／自由比例</span><span class="kbd">拖曳 / 拉角落 / Alt＋拉角</span></div>
-      <div><span>複製拓印框</span><span class="kbd">Ctrl+D</span></div>
-      <div><span>旋轉 90°</span><span class="kbd">R</span></div>
-      <div><span>復原／重做</span><span class="kbd">Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y</span></div>
-      <div><span>重算目前拓印框</span><span class="kbd">S</span></div>
-      <div><span>無縫方法 1–5</span><span class="kbd">1 2 3 4 5</span></div>
-      <div><span>接縫線／灰階／處理前</span><span class="kbd">L / G / B</span></div>
-      <div><span>平鋪格數</span><span class="kbd">Ctrl+1～4</span></div>
-      <div><span>縮放／適合視窗</span><span class="kbd">滾輪, + −, 0</span></div>
-      <div><span>平移畫布</span><span class="kbd">Shift＋拖曳 / 空白鍵＋拖曳</span></div>
-      <div><span>全螢幕</span><span class="kbd">Ctrl+F</span></div>
-      <div><span>複製結果到剪貼簿</span><span class="kbd">Ctrl+C</span></div>
-      <div><span>存／開專案</span><span class="kbd">Ctrl+S / Ctrl+O</span></div>
-      <div><span>匯出目前貼圖</span><span class="kbd">Ctrl+E</span></div>
-      <div><span>取消／關閉面板</span><span class="kbd">Esc</span></div>
+  <div class="modal tut">
+    <div class="tut-head">
+      <h2>教學</h2>
+      <span class="muted">按 <span class="kbd">?</span> 開關，<span class="kbd">Esc</span> 關閉</span>
+      <span class="grow"></span>
+      <button class="btn sm" onclick="toggleOverlay('help');loadSample()">載入範例</button>
+      <button class="btn sm gold" onclick="toggleOverlay('help');startTour(0)">重看 4 步導覽</button>
     </div>
+    <nav class="tut-tabs" role="tablist">
+      <button class="active" data-tt="quick" onclick="setTut('quick')">30 秒上手</button>
+      <button data-tt="modes" onclick="setTut('modes')">五種框法何時用</button>
+      <button data-tt="uv" onclick="setTut('uv')">排 UV 訣竅</button>
+      <button data-tt="engine" onclick="setTut('engine')">匯出到 Unity／Unreal／Blender</button>
+      <button data-tt="terms" onclick="setTut('terms')">名詞表</button>
+      <button data-tt="keys" onclick="setTut('keys')">快捷鍵</button>
+    </nav>
+    <div class="tut-pane active" data-tt="quick"><ul class="tut-list">
+      <li><i>1</i><span>截圖後按 <span class="kbd">Ctrl+V</span> 貼上，或把照片拖進中間深色底的照片區；沒照片先按「載入範例」。</span></li>
+      <li><i>2</i><span>照片太小先用滾輪放大，再依序點 4 個角：左上 → 右上 → 右下 → 左下。</span></li>
+      <li><i>3</i><span>點完第 4 點，斜的面立刻拉正，自動放進左邊「圖集」（＝很多貼圖排在一張大圖上）。</span></li>
+      <li><i>4</i><span>點歪了就拖角點微調，結果即時更新；<span class="kbd">Ctrl+Z</span> 隨時復原。</span></li>
+      <li><i>5</i><span>拓第 2 張：在照片空白處再點 4 個角，會自動開新框（或先按 <span class="kbd">N</span>）。</span></li>
+      <li><i>6</i><span>圖集裡拖曳搬位置；拉選取外框角上的金色小方塊改尺寸；<span class="kbd">R</span> 旋轉。</span></li>
+      <li><i>7</i><span>按左邊圖集上方的金色「匯出材質組」→ 五張貼圖＋UV JSON，丟進引擎就能用。</span></li>
+      <li><i>8</i><span>做到一半按頂欄「存檔」（<span class="kbd">Ctrl+S</span>）；重新整理會清空，下次用「開啟」接著做。</span></li>
+    </ul></div>
+    <div class="tut-pane" data-tt="modes"><ul class="tut-list">
+      <li><i>▱</i><span><b>四點透視 Q</b>：平面但拍斜了。武器面板、建築牆面、海報。</span></li>
+      <li><i>⌒</i><span><b>彎邊四點</b>：先放大，把邊中間小圓拖到標籤真正的弧形邊（白點＝直線、金點＝有彎）。瓶身、桶身標籤。</span></li>
+      <li><i>⬠</i><span><b>多點 P</b>：形狀不規則、外面要透明。貼花、破損鐵皮、葉片；Enter 收合。</span></li>
+      <li><i>▭</i><span><b>矩形 M</b>：已經是正面，只要裁一塊。UI 圖示、地磚、截圖裡的面板。</span></li>
+      <li><i>◯</i><span><b>橢圓 O</b>：圓形物件。儀表盤、徽章、井蓋，外面透明。</span></li>
+      <li><i>◠</i><span><b>曲線 C</b>：上緣 3 點＋下緣 3 點展平。罐頭、柱子這類整圈圓柱。</span></li>
+      <li><i>?</i><span>不確定用哪個？先用四點，彎的再加控制點。</span></li>
+    </ul></div>
+    <div class="tut-pane" data-tt="uv"><ul class="tut-list">
+      <li><i>1</i><span>先按「自動排」一次排好，再手動微調位置。</span></li>
+      <li><i>2</i><span>看得到的面（武器握把、招牌）拉大，背面、底部縮小：像素給在鏡頭看得到的地方。</span></li>
+      <li><i>3</i><span>拉選取外框角上的金色小方塊縮放＝用新尺寸重新拓，不會越拉越糊；<span class="kbd">Alt</span>＋拉角＝自由比例。</span></li>
+      <li><i>4</i><span>滾輪放大圖集精修小圖，<span class="kbd">Shift</span>＋拖曳平移，<span class="kbd">Home</span> 回全覽。</span></li>
+      <li><i>5</i><span>保留 Padding 4px＋「外擴」，引擎做 mipmap 時才不會吃到隔壁的顏色。</span></li>
+      <li><i>6</i><span>紅框＝重疊或超出圖集，匯出前清乾淨。</span></li>
+      <li><i>7</i><span>圖集用 1024／2048 這種 2 的次方，引擎壓縮最穩。</span></li>
+    </ul></div>
+    <div class="tut-pane" data-tt="engine"><ul class="tut-list">
+      <li><i>1</i><span>右欄「輸出」選目標引擎：檔名與法線 Y 軸自動對應。</span></li>
+      <li><i>U</i><span><b>Unity</b>：點 _Normal 那張 → Inspector 的 Texture Type 改成 Normal map → 按 Apply。</span></li>
+      <li><i>UE</i><span><b>Unreal</b>：雙擊 _R、_AO 貼圖 → 把 sRGB 勾掉 → 存檔（法線已自動用 DirectX）。</span></li>
+      <li><i>B</i><span><b>Blender</b>：_nor 的 Image Texture 節點 Color Space 選 Non-Color → 接到 Normal Map 節點。</span></li>
+      <li><i>{}</i><span>UV JSON：每張圖的 u0 v0 u1 v1（左上為原點），寫腳本對 UV 用。</span></li>
+      <li><i>Z</i><span>「匯出全部 ZIP」：每張拓印一個 PNG，檔名＝來源檔名_拓印名.png。</span></li>
+      <li><i>例</i><span>瓶身標籤：彎邊四點拓平 → 單張匯出 → 直接貼到瓶子模型的 UV。</span></li>
+    </ul></div>
+    <div class="tut-pane" data-tt="terms"><ul class="tut-list">
+      <li><i>拓</i><span><b>拓印</b>：把照片上的一塊拉成正面的貼圖。</span></li>
+      <li><i>透</i><span><b>透視校正</b>：用 4 個角把拍斜的面拉正（數學上叫單應性）。</span></li>
+      <li><i>圖</i><span><b>圖集 Atlas</b>：很多小貼圖排在一張大圖上，引擎少切換材質。</span></li>
+      <li><i>UV</i><span><b>UV</b>：模型表面對應到貼圖上的座標。</span></li>
+      <li><i>縫</i><span><b>無縫 Seamless</b>：上下左右接起來看不到接縫，可以重複平鋪。</span></li>
+      <li><i>光</i><span><b>去光影 De-Light</b>：拉平照片的明暗，貼圖不帶固定光源。</span></li>
+      <li><i>P</i><span><b>PBR 五張</b>：Albedo 顏色／Normal 凹凸／Roughness 粗糙／AO 縫隙陰影／Height 高度。</span></li>
+      <li><i>擴</i><span><b>外擴 Dilation</b>：把邊緣像素往外補幾格，防止接縫露出底色。</span></li>
+    </ul></div>
+    <div class="tut-pane" data-tt="keys"><ul class="tut-list keyrows">
+      <li><i>入</i><span>匯入／切換來源</span><span class="ks"><span class="kbd">Ctrl+V</span><span class="kbd">Tab</span><span class="kbd">Shift+Tab</span></span></li>
+      <li><i>框</i><span>四點／多點／矩形／橢圓／曲線；新增／刪除／複製</span><span class="ks"><span class="kbd">Q P M O C</span><span class="kbd">N</span><span class="kbd">Del</span><span class="kbd">Ctrl+D</span></span></li>
+      <li><i>彎</i><span>四點加控制點／刪控制點；多點收合／插點／刪點</span><span class="ks"><span class="kbd">點邊中小圓 或 Alt＋點邊</span><span class="kbd">Alt＋點控制點</span><span class="kbd">Enter</span></span></li>
+      <li><i>照</i><span>照片縮放／適合視窗／平移／全螢幕</span><span class="ks"><span class="kbd">滾輪 + −</span><span class="kbd">0</span><span class="kbd">Shift／空白鍵＋拖曳</span><span class="kbd">Ctrl+F</span></span></li>
+      <li><i>圖</i><span>圖集搬移／縮放／自由比例；檢視縮放／平移／全覽</span><span class="ks"><span class="kbd">拖曳</span><span class="kbd">拉角</span><span class="kbd">Alt＋拉角</span><span class="kbd">滾輪</span><span class="kbd">Shift＋拖曳／中鍵</span><span class="kbd">Home</span></span></li>
+      <li><i>改</i><span>旋轉／重算／復原／重做</span><span class="ks"><span class="kbd">R</span><span class="kbd">S</span><span class="kbd">Ctrl+Z</span><span class="kbd">Ctrl+Shift+Z / Ctrl+Y</span></span></li>
+      <li><i>存</i><span>複製結果／匯出目前貼圖／存檔／開檔</span><span class="ks"><span class="kbd">Ctrl+C</span><span class="kbd">Ctrl+E</span><span class="kbd">Ctrl+S</span><span class="kbd">Ctrl+O</span></span></li>
+      <li><i>縫</i><span>無縫方法／接縫線・灰階・處理前／平鋪格數／關閉</span><span class="ks"><span class="kbd">1–5</span><span class="kbd">L G B</span><span class="kbd">Ctrl+1～4</span><span class="kbd">Esc</span></span></li>
+    </ul></div>
   </div>
 </div>
 
-<!-- 首次上手 -->
-<div class="overlay" id="ov_onb">
-  <div class="modal">
-    <h2>南瓜拓印 Pumpkin Imprint</h2>
-    <p>把照片裡歪的東西秒拓成正面的貼圖，直接排進圖集當 UV 用。四步完成：</p>
-    <div class="onb">
-      <div><i>1</i><b>匯入</b>拖曳、貼上或選檔，可一次多張。</div>
-      <div><i>2</i><b>拓印</b>點 4 個角（透視校正）、多點沿邊描、或直接拖出矩形／橢圓，圖立刻拓下來、自動放進左邊圖集。</div>
-      <div><i>3</i><b>排版</b>圖集裡拖曳搬移、拉角落縮放、R 旋轉，自己排 UV；要平鋪材質再到右欄勾「啟用無縫化」。</div>
-      <div><i>4</i><b>輸出</b>匯出圖集 PNG＋UV JSON，或單張貼圖、PBR 材質組。</div>
-    </div>
+<!-- 首次開啟 4 步導覽（spotlight）；id 沿用 ov_onb -->
+<div id="ov_onb" class="tour" aria-live="polite">
+  <div class="tour-spot" id="tourSpot"></div>
+  <div class="tour-card" id="tourCard" role="dialog" aria-label="新手導覽">
+    <div class="tour-step">新手導覽 <b id="tourIdx">1</b> / 4</div>
+    <h2 id="tourTitle">貼照片</h2>
+    <p id="tourText"></p>
+    <div class="tour-act" id="tourAct"></div>
+    <div class="tour-dots" id="tourDots"><i></i><i></i><i></i><i></i></div>
     <div class="row">
-      <button class="btn gold" onclick="closeOnboarding()">開始使用</button>
-      <button class="btn" onclick="closeOnboarding();toggleOverlay('help')">看快捷鍵</button>
-      <span class="muted" style="margin-left:auto">工具純離線、單一檔案。創作者：南瓜</span>
+      <button class="btn gold" id="tourNext" onclick="tourNext()">下一步</button>
+      <button class="btn sm" id="tourSkip" onclick="endTour('skip')" title="這次先跳過，下次開啟還會出現">略過</button>
+      <button class="btn sm" id="tourNever" onclick="endTour('never')" title="以後不再自動出現（頂欄「教學」可重開）">不再顯示</button>
     </div>
   </div>
 </div>
@@ -688,6 +799,26 @@ function solveLinear(A){ const n=8; const M=A.map(r=>r.slice());
 function computeHomography(src){ const dst=[{x:0,y:0},{x:1,y:0},{x:1,y:1},{x:0,y:1}]; const A=[];
   for(let i=0;i<4;i++){ const {x:X,y:Y}=dst[i], {x:u,y:v}=src[i]; A.push([X,Y,1,0,0,0,-X*u,-Y*u,u]); A.push([0,0,0,X,Y,1,-X*v,-Y*v,v]); }
   return solveLinear(A); }
+/* 單應性 H（8 係數，單位方 → 原圖）的套用與反矩陣（回傳 9 係數） */
+function applyH(H,x,y){ const den=H[6]*x+H[7]*y+(H.length>8?H[8]:1); return {x:(H[0]*x+H[1]*y+H[2])/den, y:(H[3]*x+H[4]*y+H[5])/den}; }
+function invertH(H){ const a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7],i=1;
+  const A=e*i-f*h, B=-(d*i-f*g), C=d*h-e*g, D=-(b*i-c*h), E=a*i-c*g, F=-(a*h-b*g), G=b*f-c*e, Hh=-(a*f-c*d), I=a*e-b*d;
+  const det=a*A+b*B+c*C||1e-12; return [A/det,D/det,G/det,B/det,E/det,Hh/det,C/det,F/det,I/det]; }
+/* 可彎邊：每條邊的控制點 {s,d} 存在校正空間（s＝沿邊參數 0–1，d＝垂直邊的偏移）。
+   邊界曲線＝通過兩端點(偏移 0)與控制點的多項式：1 點＝二次、2 點＝三次（皆為貝茲曲線）。全部 d=0 回傳 null（＝直線）。 */
+function bendFn(list){
+  if(!list||!list.length) return null;
+  const P=list.slice(0,2).map(h=>({s:Math.min(0.95,Math.max(0.05,+h.s||0.5)),d:+h.d||0})).sort((a,b)=>a.s-b.s);
+  if(P.every(p=>Math.abs(p.d)<1e-9)) return null;
+  if(P.length===2 && P[1].s-P[0].s<0.04){ const m=(P[0].s+P[1].s)/2; P[0].s=m-0.02; P[1].s=m+0.02; }
+  const xs=[0,...P.map(p=>p.s),1], ys=[0,...P.map(p=>p.d),0], n=xs.length;
+  return u=>{ let s=0; for(let k=1;k<n-1;k++){ let L=1; for(let m=0;m<n;m++){ if(m!==k) L*=(u-xs[m])/(xs[k]-xs[m]); } s+=ys[k]*L; } return s; };
+}
+/* Coons patch（校正空間）：上 T(u)=(u,fT)、下 B(u)=(u,1+fB)、左 L(v)=(fL,v)、右 R(v)=(1+fR,v)
+   S(u,v)＝(u + (1-u)·fL(v) + u·fR(v),  v + (1-v)·fT(u) + v·fB(u))；全部 f=0 時 S＝恆等 → 純單應性 */
+function bendFns(bend){ const B=bend||[]; return {T:bendFn(B[0]),R:bendFn(B[1]),B:bendFn(B[2]),L:bendFn(B[3])}; }
+function hasBend(bend){ const f=bendFns(bend); return !!(f.T||f.R||f.B||f.L); }
+function coonsPoint(f,u,v){ return {x:u+(1-u)*(f.L?f.L(v):0)+u*(f.R?f.R(v):0), y:v+(1-v)*(f.T?f.T(u):0)+v*(f.B?f.B(u):0)}; }
 function bezierPoint(p0,p1,p2,t){ const a=(1-t)*(1-t), b=2*(1-t)*t, c=t*t; return {x:a*p0.x+b*p1.x+c*p2.x, y:a*p0.y+b*p1.y+c*p2.y}; }
 function sampleBilinear(d,w,h,x,y,out,o,nearest){
   x=x<0?0:x>w-1.001?w-1.001:x; y=y<0?0:y>h-1.001?h-1.001:y;
@@ -697,23 +828,32 @@ function sampleBilinear(d,w,h,x,y,out,o,nearest){
   out[o+3]=255;
 }
 function pip(x,y,poly){ let inside=false; for(let i=0,j=poly.length-1;i<poly.length;j=i++){ const a=poly[i],b=poly[j]; if(((a.y>y)!==(b.y>y)) && (x < (b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x)) inside=!inside; } return inside; }
-function extract(src,mode,pts,outW,outH,pixel){
+function extract(src,mode,pts,outW,outH,pixel,bend){
   const {w,h,data}=src; const out=new Uint8ClampedArray(outW*outH*4);
   if(mode==='rect'||mode==='ellipse'||mode==='poly'){
     let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity; pts.forEach(p=>{ x0=Math.min(x0,p.x); y0=Math.min(y0,p.y); x1=Math.max(x1,p.x); y1=Math.max(y1,p.y); });
     const bw=Math.max(1,x1-x0), bh=Math.max(1,y1-y0), cx=(x0+x1)/2, cy=(y0+y1)/2, rx=bw/2, ry=bh/2;
     const inside=(u,v)=> mode==='rect' ? 1 : mode==='ellipse' ? ((((u-cx)/rx)**2+((v-cy)/ry)**2)<=1?1:0) : (pip(u,v,pts)?1:0);
     for(let j=0;j<outH;j++){ for(let i=0;i<outW;i++){ const u=x0+(i+0.5)/outW*bw, v=y0+(j+0.5)/outH*bh; const o=(j*outW+i)*4;
-      sampleBilinear(data,w,h,u,v,out,o,pixel);
+      sampleBilinear(data,w,h,pixel?u-0.5:u,pixel?v-0.5:v,out,o,pixel); // 像素風：取像素格本身（不偏半格）
       if(mode==='rect'){ out[o+3]=255; continue; }
       const du=bw/outW*0.25, dv=bh/outH*0.25; // 2×2 超取樣做邊緣抗鋸齒
       const a=inside(u-du,v-dv)+inside(u+du,v-dv)+inside(u-du,v+dv)+inside(u+du,v+dv); out[o+3]=a*63.75; } }
     return out;
   }
   if(mode==='quad'){
-    const H=computeHomography(pts);
+    const H=computeHomography(pts); const f=bendFns(bend);
+    if(!(f.T||f.R||f.B||f.L)){ // 直線邊：與 v2.2 完全相同的純單應性
     for(let j=0;j<outH;j++){ const Y=j/(outH-1); for(let i=0;i<outW;i++){ const X=i/(outW-1); const den=H[6]*X+H[7]*Y+1;
       sampleBilinear(data,w,h,(H[0]*X+H[1]*Y+H[2])/den,(H[3]*X+H[4]*Y+H[5])/den,out,(j*outW+i)*4,pixel); } }
+    } else { // 可彎邊：校正空間 Coons patch → H 映回原圖取樣
+      const tU=new Float64Array(outW), bU=new Float64Array(outW), lV=new Float64Array(outH), rV=new Float64Array(outH);
+      for(let i=0;i<outW;i++){ const X=i/(outW-1); tU[i]=f.T?f.T(X):0; bU[i]=f.B?f.B(X):0; }
+      for(let j=0;j<outH;j++){ const Y=j/(outH-1); lV[j]=f.L?f.L(Y):0; rV[j]=f.R?f.R(Y):0; }
+      for(let j=0;j<outH;j++){ const Y=j/(outH-1); for(let i=0;i<outW;i++){ const X=i/(outW-1);
+        const xs=X+(1-X)*lV[j]+X*rV[j], ys=Y+(1-Y)*tU[i]+Y*bU[i]; const den=H[6]*xs+H[7]*ys+1;
+        sampleBilinear(data,w,h,(H[0]*xs+H[1]*ys+H[2])/den,(H[3]*xs+H[4]*ys+H[5])/den,out,(j*outW+i)*4,pixel); } }
+    }
   } else {
     const [t0,t1,t2,b0,b1,b2]=pts;
     for(let i=0;i<outW;i++){ const t=i/(outW-1); const top=bezierPoint(t0,t1,t2,t), bot=bezierPoint(b0,b1,b2,t);
@@ -803,6 +943,17 @@ function seamScatter(ch,w,h,p){
   }
   return base;
 }
+/* 細節回復：無縫混合會把接縫帶的高頻（紋理細節）平均掉。拿「原圖同一位置」（位移半張後）的局部高頻能量當目標，
+   哪裡比原圖弱就把高通加回去（最多 3 倍）；原本就平的地方不會被硬拉出雜訊。鏡像法不損細節，不處理。 */
+function detailRecover(ch,orig,w,h,p){ const amt=(p.detail||0)/100; if(amt<=0||p.method==='mirror') return ch; const n=w*h, r=2;
+  const Yo=lumOf(orig,n), Lo=blur3(Yo,w,h,r,false), Eo=new Float32Array(n); for(let i=0;i<n;i++){ const d=Yo[i]-Lo[i]; Eo[i]=d*d; }
+  const EoS=shiftCh(blur3(Eo,w,h,8,false),w,h,w>>1,h>>1);
+  const Y=lumOf(ch,n), L=blur3(Y,w,h,r,true), E=new Float32Array(n); for(let i=0;i<n;i++){ const d=Y[i]-L[i]; E[i]=d*d; }
+  const Eb=blur3(E,w,h,8,true), gain=new Float32Array(n); for(let i=0;i<n;i++){ const g=Math.sqrt((EoS[i]+1)/(Eb[i]+1)); gain[i]=1+amt*((g<1?1:g>3?3:g)-1); }
+  return ch.map(c=>{ const Lc=blur3(c,w,h,r,true); const o=new Float32Array(n); for(let i=0;i<n;i++) o[i]=clamp255(Lc[i]+(c[i]-Lc[i])*gain[i]); return o; }); }
+/* 局部對比：大半徑高通加回（正值更立體、負值更平） */
+function localContrast(ch,w,h,p){ const k=(p.lcon||0)/100; if(!k) return ch; const n=w*h, rad=Math.max(8,Math.round(Math.min(w,h)/24));
+  return ch.map(c=>{ const B=blur3(c,w,h,rad,true); const o=new Float32Array(n); for(let i=0;i<n;i++) o[i]=clamp255(c[i]+(c[i]-B[i])*k*1.2); return o; }); }
 function colorAdjust(ch,w,h,p){
   const n=w*h, c=(p.con/100)+1, b=p.bri*1.6;
   for(let k=0;k<3;k++){ const s=ch[k]; for(let i=0;i<n;i++) s[i]=clamp255((s[i]-128)*c+128+b); }
@@ -850,16 +1001,17 @@ self.onmessage = function(e){
     const t0=Date.now(); const prog=pct=>self.postMessage({type:'progress',jobId:m.jobId,regionId:m.regionId,pct});
     if(m.stage==='base'){
       const src=SRC.get(m.sourceId); if(!src) throw new Error('來源圖不存在');
-      const out=extract(src,m.mode,m.pts,m.outW,m.outH,!!m.pixel);
+      const out=extract(src,m.mode,m.pts,m.outW,m.outH,!!m.pixel,m.bend);
       self.postMessage({type:'done',jobId:m.jobId,regionId:m.regionId,stage:'base',w:m.outW,h:m.outH,data:out.buffer,ms:Date.now()-t0},[out.buffer]);
     } else if(m.stage==='proc'){
       const w=m.w,h=m.h; const srcArr=new Uint8ClampedArray(m.data); const alpha=alphaOf(srcArr,w*h); let ch=split(srcArr,w,h); prog(10);
       ch=delight(ch,w,h,m.delight); prog(35);
-      const s=m.seamless;
+      const s=m.seamless; const pre=(s.method!=='none'&&s.detail>0)?ch.map(a=>Float32Array.from(a)):null;
       if(s.method==='offsetLF') ch=seamOffsetLF(ch,w,h,s);
       else if(s.method==='freq') ch=seamFreq(ch,w,h,s);
       else if(s.method==='scatter') ch=seamScatter(ch,w,h,s);
       else if(s.method==='mirror') ch=seamMirror(ch,w,h);
+      if(s.method!=='none'){ if(pre) ch=detailRecover(ch,pre,w,h,s); ch=localContrast(ch,w,h,s); }
       prog(80);
       ch=colorAdjust(ch,w,h,s); const score=seamScore(ch,w,h); const out=merge(ch,w,h,alpha); prog(100);
       self.postMessage({type:'done',jobId:m.jobId,regionId:m.regionId,stage:'proc',w,h,data:out.buffer,score,ms:Date.now()-t0},[out.buffer]);
@@ -880,6 +1032,8 @@ const $ = id => document.getElementById(id);
 const clamp = (v,a,b)=> v<a?a:v>b?b:v;
 const deepMerge = (t,s)=>{ for(const k in s){ if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){ t[k]=deepMerge(t[k]||{},s[k]); } else t[k]=s[k]; } return t; };
 const clone = o => JSON.parse(JSON.stringify(o));
+// 幾何函式與 worker 共用同一份原始碼（主執行緒畫曲線、換算控制點用）
+const GEO = new Function('self', document.getElementById('wk').textContent + '\n;return {computeHomography,applyH,invertH,bendFn,bendFns,hasBend,coonsPoint,extract};')({});
 
 /* ---------- state ---------- */
 const state = {
@@ -897,11 +1051,11 @@ let regionCounter = 1;
 
 const DEFAULTS = {
   delight:{ enabled:false, radius:96, strength:50, hiThr:235, hiMix:0, gamma:100 },
-  seamless:{ method:'none', lastMethod:'offsetLF', blendW:24, lowR:96, highMode:'mirror', patch:64, feather:60, seed:1, bri:0, con:0, sharpen:0 },
+  seamless:{ method:'none', lastMethod:'offsetLF', blendW:24, lowR:96, highMode:'mirror', patch:64, feather:60, seed:1, detail:0, lcon:0, bri:0, con:0, sharpen:0 },
   pbr:{ normalStr:100, normalY:'gl', heightBlur:1, roughCon:0, roughInv:false, aoR:48, aoStr:60 },
 };
 function defaultRegion(sourceId){
-  return { id:nextId(), name:`texture_${regionCounter++}`, sourceId, mode:'quad', pts:[], closed:false, outW:512, outH:512, autoSize:true, pixel:false, rot:0, flipX:false, flipY:false,
+  return { id:nextId(), name:`texture_${regionCounter++}`, sourceId, mode:'quad', pts:[], bend:[[],[],[],[]], closed:false, outW:512, outH:512, autoSize:true, pixel:false, rot:0, flipX:false, flipY:false,
     delight:clone(DEFAULTS.delight), seamless:clone(DEFAULTS.seamless), pbr:clone(DEFAULTS.pbr) };
 }
 const regionById = id => state.regions.find(r=>r.id===id);
@@ -949,7 +1103,7 @@ function onWorkerMessage(e){
   const rt=RT.get(m.regionId); const r=regionById(m.regionId);
   if(!rt||!r){ return; }
   if(m.stage==='base'){
-    rt.base=new ImageData(new Uint8ClampedArray(m.data),m.w,m.h); rt.baseKey=rt.pendingBaseKey; rt.procKey=null;
+    rt.base=new ImageData(new Uint8ClampedArray(m.data),m.w,m.h); rt.baseKey=rt.pendingBaseKey; rt.res=rt.pendingRes||'full'; rt.procKey=null;
     runProc(m.regionId);
   } else if(m.stage==='proc'){
     rt.result=new ImageData(new Uint8ClampedArray(m.data),m.w,m.h); rt.procKey=rt.pendingProcKey; rt.score=m.score; rt.pbrKey=null; rt.pbr=null;
@@ -968,17 +1122,23 @@ function setProgress(p){ const el=$('progress'); el.style.opacity=1; el.style.wi
 
 /* ---------- pipeline ---------- */
 const timers = new Map();
-function scheduleRegion(id,delay=250){ clearTimeout(timers.get(id)); timers.set(id,setTimeout(()=>runRegion(id),delay)); }
+function scheduleRegion(id,delay=250){ clearTimeout(timers.get(id)); getRT(id).scheduled=true; timers.set(id,setTimeout(()=>runRegion(id),delay)); }
+const isSettled = id => { const rt=RT.get(id); return !!rt && !rt.scheduled && !rt.busy && !rt.pending && rt.res!=='low'; }; // 沒有排程、沒有運算中、全解析度
 function runRegion(id){
-  const r=regionById(id); if(!r) return; const rt=getRT(id);
+  const r=regionById(id); if(!r) return; const rt=getRT(id); rt.scheduled=false;
+  if(drag && drag.kind==='box' && drag.regionId===id) return; // 矩形／橢圓拖框中：放開才拓（避免用半個框估尺寸）
   if(!isComplete(r)){ rt.base=rt.result=rt.resultCanvas=rt.thumb=null; rt.score=null; rt.baseKey=rt.procKey=null; renderRegionList(); if(id===state.selectedRegionId){ drawTile(); updateScore(); } return; }
   if(r.autoSize && !rt.base){ const est=estimateSize(r); if(est){ r.outW=est.w; r.outH=est.h; if(id===state.selectedRegionId) bindRegionToUI(); } }
   if(rt.busy){ rt.pending=true; return; }
-  const baseKey=JSON.stringify([r.sourceId,r.mode,r.pts,r.outW,r.outH,!!r.pixel]);
+  // 慢速模式：拖點期間用 ¼ 解析度預覽，放開後全解析度重算（rt.res＝'low'｜'full'）
+  const low=!!(drag && drag.regionId===id && drag.kind!=='box');
+  const ow=low?Math.max(16,Math.round(r.outW/4)):r.outW, oh=low?Math.max(16,Math.round(r.outH/4)):r.outH;
+  const bend=r.mode==='quad'?(r.bend||null):null;
+  const baseKey=JSON.stringify([r.sourceId,r.mode,r.pts,ow,oh,!!r.pixel,bend]);
   if(rt.baseKey!==baseKey || !rt.base){
     if(!sourceStore.has(r.sourceId)) return;
-    rt.busy=true; rt.pendingBaseKey=baseKey; const jobId=jobSeq++; latestJob.set(id+':base',jobId); setProgress(5);
-    wsend({type:'job',jobId,regionId:id,stage:'base',sourceId:r.sourceId,mode:r.mode,pts:r.pts,outW:r.outW,outH:r.outH,pixel:!!r.pixel});
+    rt.busy=true; rt.pendingBaseKey=baseKey; rt.pendingRes=low?'low':'full'; const jobId=jobSeq++; latestJob.set(id+':base',jobId); setProgress(5);
+    wsend({type:'job',jobId,regionId:id,stage:'base',sourceId:r.sourceId,mode:r.mode,pts:r.pts,bend,outW:ow,outH:oh,pixel:!!r.pixel});
   } else runProc(id);
 }
 function runProc(id){
@@ -999,10 +1159,11 @@ function finalizeRegion(id){
   const r=regionById(id), rt=getRT(id); if(!r||!rt.result) return;
   rt.resultCanvas=applyOrient(imageDataToCanvas(rt.result),r);
   rt.baseCanvas=applyOrient(imageDataToCanvas(rt.base),r);
-  const t=document.createElement('canvas'); t.width=t.height=96; t.getContext('2d').drawImage(rt.resultCanvas,0,0,96,96); rt.thumb=t.toDataURL();
+  const rc=rt.resultCanvas, ts=128/Math.max(rc.width,rc.height); const t=document.createElement('canvas'); t.width=Math.max(1,Math.round(rc.width*ts)); t.height=Math.max(1,Math.round(rc.height*ts));
+  const tx=t.getContext('2d'); tx.imageSmoothingEnabled=!r.pixel; tx.drawImage(rc,0,0,t.width,t.height); rt.thumb=t.toDataURL();
   renderRegionList();
-  if(id===state.selectedRegionId){ drawTile(); updateScore(); if($('tabs').querySelector('.active').dataset.tab==='pbr'||preview.light) runPBR(id); }
-  atlasPlaceIfNew(id); updateSteps();
+  if(id===state.selectedRegionId){ drawTile(); updateScore(); if(rt.res!=='low'&&($('tabs').querySelector('.active').dataset.tab==='pbr'||preview.light)) runPBR(id); }
+  atlasPlaceIfNew(id); updateSteps(); updateStatus();
 }
 function runPBR(id){
   const r=regionById(id), rt=getRT(id); if(!r||!rt.result) return Promise.resolve(null);
@@ -1040,7 +1201,7 @@ function setActiveSource(id,fit){ state.activeSourceId=id; const src=sourceStore
   if(fit){ resizeCanvasToHolder(); fitImageToView(); }
   const sel=selected(); if(sel&&sel.sourceId!==id){ const first=state.regions.find(r=>r.sourceId===id); state.selectedRegionId=first?first.id:null; }
   renderSourceList(); renderRegionList(); bindRegionToUI(); redraw(); updateSteps(); drawTile(); updateScore(); updateStatus(); }
-function updateStatus(){ const s=state.sources.find(x=>x.id===state.activeSourceId); const r=selected(); $('status').textContent= !s?'請載入照片以開始' : `${s.name} ${s.w}×${s.h}` + (r?` · ${r.name}${isComplete(r)?'':(r.mode==='poly'?`（${r.pts.length} 點，Enter 收合）`:r.mode==='rect'||r.mode==='ellipse'?'（按住拖出範圍）':`（還缺 ${needPts(r)-r.pts.length} 點）`)}`:' · 在照片上點 4 個角或拖框'); }
+function updateStatus(){ const s=state.sources.find(x=>x.id===state.activeSourceId); const r=selected(); const rt=r?RT.get(r.id):null; $('status').textContent= !s?'請載入照片以開始' : `${s.name} ${s.w}×${s.h}` + (rt&&rt.res==='low'?' · 拖曳中：¼ 解析度預覽，放開後全解析度':'') + (r?` · ${r.name}${isComplete(r)?'':(r.mode==='poly'?`（${r.pts.length} 點，Enter 收合）`:r.mode==='rect'||r.mode==='ellipse'?'（按住拖出範圍）':`（還缺 ${needPts(r)-r.pts.length} 點）`)}`:' · 在照片上點 4 個角或拖框'); }
 function deleteSource(id){ if(!confirm('刪除這張來源圖與它的所有選區？（可 Ctrl+Z 復原）')) return; commit();
   state.sources=state.sources.filter(s=>s.id!==id); state.regions=state.regions.filter(r=>r.sourceId!==id);
   if(state.activeSourceId===id) setActiveSource(state.sources[0]?state.sources[0].id:null,true); else { renderSourceList(); renderRegionList(); }
@@ -1070,7 +1231,7 @@ stage.addEventListener('wheel',e=>{ e.preventDefault(); zoomBy(e.deltaY<0?1.1:1/
 
 const COL={gold:'#FDC302',blue:'#4D6BFE',white:'rgba(255,255,255,.75)',ink:'#161415'};
 const MODE_INFO={
-  quad:{label:'四點透視',pts:4,hint:'依序點 4 個角（左上→右上→右下→左下），歪的面會校正成正面。拖角點微調，拖中心方塊整體移動。'},
+  quad:{label:'四點透視',pts:4,hint:'依序點 4 個角（左上→右上→右下→左下），歪的面會校正成正面。拖角點微調，拖中心方塊整體移動。彎的面（瓶身、桶身）：先滾輪放大，把邊中間的小圓（或 Alt＋點邊）拖到標籤真正的弧形邊就拉平；控制點白＝直線、金＝有彎；Alt＋點控制點刪除。'},
   poly:{label:'多點',pts:3,hint:'逐點沿著面的邊緣點，點回第一點或按 Enter 收合；外面透明。Alt＋點邊線插入點、Alt＋點頂點刪除。'},
   rect:{label:'矩形',pts:2,hint:'在照片上按住拖出矩形框，放開即拓印。拖角點可調整。'},
   ellipse:{label:'橢圓',pts:2,hint:'按住拖出橢圓的外框，放開即拓印；橢圓外透明。拖角點可調整。'},
@@ -1079,8 +1240,34 @@ const MODE_INFO={
 function regionCentroid(r){ const n=r.pts.length; if(!n) return null; let x=0,y=0; r.pts.forEach(p=>{x+=p.x;y+=p.y;}); return {x:x/n,y:y/n}; }
 function bez(p0,p1,p2,t){ const a=(1-t)*(1-t),b=2*(1-t)*t,c=t*t; return {x:a*p0.x+b*p1.x+c*p2.x,y:a*p0.y+b*p1.y+c*p2.y}; }
 function bboxOf(pts){ let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity; pts.forEach(p=>{ x0=Math.min(x0,p.x); y0=Math.min(y0,p.y); x1=Math.max(x1,p.x); y1=Math.max(y1,p.y); }); return {x0,y0,x1,y1,w:x1-x0,h:y1-y0}; }
+/* ---------- 可彎邊四點框（控制點存在校正空間 {s,d}） ---------- */
+const quadH = r => GEO.computeHomography(r.pts);
+function rectOfHandle(e,h){ return e===0?{x:h.s,y:h.d}: e===1?{x:1+h.d,y:h.s}: e===2?{x:h.s,y:1+h.d}:{x:h.d,y:h.s}; }
+function bendHandleImg(H,e,h){ const q=rectOfHandle(e,h); return GEO.applyH(H,q.x,q.y); }
+function handleFromImg(Hi,e,ip){ const q=GEO.applyH(Hi,ip.x,ip.y); return e===0?{s:q.x,d:q.y}: e===1?{s:q.y,d:q.x-1}: e===2?{s:q.x,d:q.y-1}:{s:q.y,d:q.x}; }
+function quadEdgeImgPts(r,e,n,H,f){ H=H||quadH(r); f=f||GEO.bendFns(r.bend); const out=[]; // 從角 e 到角 e+1
+  for(let k=0;k<=n;k++){ const t=k/n; const uv= e===0?[t,0]: e===1?[1,t]: e===2?[1-t,1]:[0,1-t]; const c=GEO.coonsPoint(f,uv[0],uv[1]); out.push(GEO.applyH(H,c.x,c.y)); } return out; }
+const quadBent = r => r.mode==='quad' && r.pts.length>=4 && GEO.hasBend(r.bend);
+function hitHandle(r,sp){ if(!(r.mode==='quad'&&r.pts.length>=4&&r.bend)) return null; const H=quadH(r);
+  for(let e=0;e<4;e++){ const L=r.bend[e]||[]; for(let i=0;i<L.length;i++){ const p=imgToScreen(bendHandleImg(H,e,L[i])); if(Math.abs(p.x-sp.x)+Math.abs(p.y-sp.y)<10) return {e,i}; } } return null; }
+function ghostOf(r,e,H,f){ return imgToScreen(quadEdgeImgPts(r,e,2,H,f)[1]); } // 邊中點（提示可加控制點）
+function hitGhost(r,sp){ if(!(r.mode==='quad'&&r.pts.length>=4)) return -1; const H=quadH(r), f=GEO.bendFns(r.bend); for(let e=0;e<4;e++){ if((r.bend[e]||[]).length) continue; const g=ghostOf(r,e,H,f); if(Math.hypot(g.x-sp.x,g.y-sp.y)<8) return e; } return -1; }
+function hitQuadEdge(r,sp,rad=8){ const H=quadH(r), f=GEO.bendFns(r.bend); for(let e=0;e<4;e++){ const P=quadEdgeImgPts(r,e,24,H,f).map(imgToScreen);
+    for(let k=0;k<P.length-1;k++){ const a=P[k],b=P[k+1]; const L=Math.hypot(b.x-a.x,b.y-a.y)||1; const t=clamp(((sp.x-a.x)*(b.x-a.x)+(sp.y-a.y)*(b.y-a.y))/(L*L),0,1); if(Math.hypot(a.x+(b.x-a.x)*t-sp.x,a.y+(b.y-a.y)*t-sp.y)<rad) return e; } } return -1; }
+/* 吸附成直線（d=0）：只在「把已經彎出去的點拖回來」時生效——這次拖曳曾離直線 ≥ 2 倍距離＋2px、現在又回到 5px 內；
+   剛從邊上拉出來的點（小物件全覽時弧度可能只有幾 px）拖到哪就彎到哪，不會被吸回去。離直線 < 1px 一律視為直線。 */
+const BEND_SNAP_PX=5;
+const handleLineDist=(r,e,h,H)=>{ H=H||quadH(r); const a=imgToScreen(bendHandleImg(H,e,h)), b=imgToScreen(bendHandleImg(H,e,{s:h.s,d:0})); return Math.hypot(a.x-b.x,a.y-b.y); };
+function handleAt(r,e,ip,sp,dg){ const H=quadH(r), Hi=GEO.invertH(H); const h=handleFromImg(Hi,e,ip); h.s=clamp(h.s,0.05,0.95);
+  const on=imgToScreen(bendHandleImg(H,e,{s:h.s,d:0})), dist=Math.hypot(on.x-sp.x,on.y-sp.y);
+  if(dg) dg.maxDist=Math.max(dg.maxDist||0,dist);
+  if(dist<1 || (dg && dist<BEND_SNAP_PX && dg.maxDist>=dist*2+2)) h.d=0; return h; }
+function addBendHandle(r,e,ip,sp,noCommit){ if(!r.bend) r.bend=[[],[],[],[]]; const L=r.bend[e]; if(L.length>=2){ toast('每條邊最多 2 個控制點（Alt＋點控制點可刪除）'); return -1; }
+  if(!noCommit) commit(); const h=handleAt(r,e,ip,sp); const f=GEO.bendFn(L); h.d=f?f(h.s):0; // 插在目前曲線上，形狀不跳
+  L.push(h); onRegionGeomChanged(r.id); if(!localStorage.getItem('ptr.bendTip')){ localStorage.setItem('ptr.bendTip','1'); toast('已加控制點：拖到標籤真正的邊，讓金線貼著弧線（金點＝有彎、白點＝直線）；Alt＋點控制點刪除'); } return L.length-1; }
 function regionOutline(r){ // 螢幕座標輪廓
   const P=r.pts.map(imgToScreen);
+  if(r.mode==='quad' && quadBent(r)){ const H=quadH(r), f=GEO.bendFns(r.bend); const out=[]; for(let e=0;e<4;e++){ const E=quadEdgeImgPts(r,e,24,H,f); E.pop(); E.forEach(p=>out.push(imgToScreen(p))); } return out; }
   if(r.mode==='quad'||r.mode==='poly') return P;
   if(r.mode==='rect'){ if(P.length<2) return P; const b=bboxOf(P); return [{x:b.x0,y:b.y0},{x:b.x1,y:b.y0},{x:b.x1,y:b.y1},{x:b.x0,y:b.y1}]; }
   if(r.mode==='ellipse'){ if(P.length<2) return P; const b=bboxOf(P); const cx=(b.x0+b.x1)/2, cy=(b.y0+b.y1)/2, rx=b.w/2, ry=b.h/2; const out=[]; for(let i=0;i<48;i++){ const a=i/48*Math.PI*2; out.push({x:cx+Math.cos(a)*rx,y:cy+Math.sin(a)*ry}); } return out; }
@@ -1106,6 +1293,10 @@ function drawRegion(r,sel){
   if(r.mode==='poly'&&!r.closed&&P.length>=3&&sel){ ctx.strokeStyle='rgba(253,195,2,.5)'; ctx.setLineDash([3,3]); ctx.beginPath(); ctx.moveTo(P[P.length-1].x,P[P.length-1].y); ctx.lineTo(P[0].x,P[0].y); ctx.stroke(); ctx.setLineDash([]); }
   P.forEach((p,i)=>{ const isBlue = r.mode==='quad'||r.mode==='poly' ? i===0 : r.mode==='curve' ? i>=3 : false; ctx.fillStyle=isBlue?COL.blue:COL.gold; ctx.beginPath(); ctx.arc(p.x,p.y,sel?6:4.5,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#161415'; ctx.lineWidth=1.5; ctx.stroke();
     if(sel&&(r.mode==='quad'||r.mode==='curve'||(r.mode==='poly'&&!r.closed))){ ctx.fillStyle='#fff'; ctx.font='600 10px Roboto Mono, monospace'; ctx.fillText(String(i+1),p.x+8,p.y-8); } });
+  if(sel&&complete&&r.mode==='quad'){ const H=quadH(r), f=GEO.bendFns(r.bend);
+    for(let e=0;e<4;e++){ const L=(r.bend&&r.bend[e])||[];
+      if(!L.length){ const g=ghostOf(r,e,H,f); ctx.beginPath(); ctx.arc(g.x,g.y,4,0,Math.PI*2); ctx.fillStyle='rgba(22,20,21,.55)'; ctx.fill(); ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.lineWidth=1.5; ctx.stroke(); }
+      L.forEach(h=>{ const p=imgToScreen(bendHandleImg(H,e,h)); ctx.beginPath(); ctx.moveTo(p.x,p.y-7); ctx.lineTo(p.x+7,p.y); ctx.lineTo(p.x,p.y+7); ctx.lineTo(p.x-7,p.y); ctx.closePath(); ctx.fillStyle=h.d===0?'#fff':COL.gold; ctx.fill(); ctx.strokeStyle='#161415'; ctx.lineWidth=1.5; ctx.stroke(); }); } }
   if(complete){ const c=imgToScreen(regionCentroid(r)); ctx.fillStyle=sel?COL.gold:COL.white; ctx.strokeStyle='#161415'; ctx.lineWidth=1.5; ctx.fillRect(c.x-6,c.y-6,12,12); ctx.strokeRect(c.x-6,c.y-6,12,12); }
   const lp=outline[0]||P[0]; ctx.font='600 12px Roboto, Noto Sans TC, sans-serif'; const label=r.name; const tw=ctx.measureText(label).width+12;
   ctx.fillStyle=sel?COL.gold:'rgba(22,20,21,.75)'; ctx.fillRect(lp.x+8,lp.y+8,tw,20); ctx.fillStyle=sel?COL.ink:'#fff'; ctx.fillText(label,lp.x+14,lp.y+22);
@@ -1126,6 +1317,14 @@ stage.addEventListener('mousedown',e=>{
   // Alt：多邊形插入／刪除頂點
   if(e.altKey && sel && sel.mode==='poly' && sel.sourceId===state.activeSourceId){ const pi=hitPoint(sel,sp); if(pi>=0){ if(sel.pts.length>3){ commit(); sel.pts.splice(pi,1); onRegionGeomChanged(sel.id); } return; }
     const ei=hitEdge(sel,sp); if(ei>=0){ commit(); sel.pts.splice(ei+1,0,screenToImg(sp)); onRegionGeomChanged(sel.id); return; } }
+  // 四點框可彎邊：拖／刪控制點、Alt＋點邊或點邊中點加控制點（角點優先）
+  if(sel && sel.mode==='quad' && sel.sourceId===state.activeSourceId && isComplete(sel) && hitPoint(sel,sp)<0){
+    const hh=hitHandle(sel,sp);
+    if(hh){ if(e.altKey){ commit(); sel.bend[hh.e].splice(hh.i,1); onRegionGeomChanged(sel.id); return; } drag={kind:'handle',regionId:sel.id,edge:hh.e,idx:hh.i,pre:snapshot(),maxDist:handleLineDist(sel,hh.e,sel.bend[hh.e][hh.i])}; return; }
+    const ge=e.altKey?hitQuadEdge(sel,sp):hitGhost(sel,sp);
+    if(ge>=0){ const pre=snapshot(); const i=addBendHandle(sel,ge,screenToImg(sp),sp,true); if(i>=0){ history.past.push(pre); if(history.past.length>history.max) history.past.shift(); history.future=[]; updateUndoButtons(); drag={kind:'handle',regionId:sel.id,edge:ge,idx:i,pre:snapshot(),maxDist:0}; } return; }
+  }
+  if(tourDemoState) finishTourDemo(); // 導覽正在自動點角時使用者自己點畫布：先把示範點完，這一下照一般規則處理
   const drawing = sel && sel.sourceId===state.activeSourceId && !isComplete(sel);
   const order = drawing ? [sel] : [...(sel&&sel.sourceId===state.activeSourceId?[sel]:[]), ...regs.filter(r=>r!==sel)]; // 畫到一半時不讓別的框搶選取
   for(const r of order){ const idx=hitPoint(r,sp); if(idx>=0){
@@ -1138,13 +1337,14 @@ stage.addEventListener('mousedown',e=>{
   else { commit(); }
   const ip=screenToImg(sp);
   if(target.mode==='rect'||target.mode==='ellipse'){ target.pts=[ip,{x:ip.x,y:ip.y}]; drag={kind:'box',regionId:target.id,pre:null}; redraw(); return; }
+  if(target.mode!=='poly' && target.pts.length>=needPts(target)) return; // 防呆：四點／曲線等固定點數的框不會被加超過
   target.pts.push(ip); onRegionGeomChanged(target.id);
 });
 window.addEventListener('mousemove',e=>{
   if(!img) return; const sp=stageMousePos(e);
   if(panning){ view.x=viewStart.x+(sp.x-panStart.x); view.y=viewStart.y+(sp.y-panStart.y); redraw(); return; }
   if(drag){ const r=regionById(drag.regionId); if(!r){ drag=null; return; } const ip=screenToImg(sp);
-    if(drag.kind==='point'){ r.pts[drag.idx]=ip; } else if(drag.kind==='box'){ r.pts[1]=ip; } else { const dx=ip.x-drag.start.x, dy=ip.y-drag.start.y; r.pts=drag.orig.map(p=>({x:p.x+dx,y:p.y+dy})); }
+    if(drag.kind==='point'){ r.pts[drag.idx]=ip; } else if(drag.kind==='box'){ r.pts[1]=ip; } else if(drag.kind==='handle'){ r.bend[drag.edge][drag.idx]=handleAt(r,drag.edge,ip,sp,drag); } else { const dx=ip.x-drag.start.x, dy=ip.y-drag.start.y; r.pts=drag.orig.map(p=>({x:p.x+dx,y:p.y+dy})); }
     redraw(); if(drag.kind!=='box') scheduleRegion(r.id,120); }
 });
 window.addEventListener('mouseup',()=>{ if(panning){ panning=false; stage.classList.remove('panning'); }
@@ -1170,13 +1370,14 @@ function deleteRegion(id){ id=id??state.selectedRegionId; if(id==null) return; c
   renderRegionList(); bindRegionToUI(); redraw(); drawTile(); updateScore(); renderAtlas(); updateSteps(); }
 function selectRegion(id){ if(state.selectedRegionId===id) return; state.selectedRegionId=id; const r=regionById(id); if(r&&r.sourceId!==state.activeSourceId) setActiveSource(r.sourceId,true); renderRegionList(); bindRegionToUI(); redraw(); drawTile(); updateScore(); updateStatus(); if($('tabs').querySelector('.active').dataset.tab==='pbr') { renderPBRThumbs(); runPBR(id); } renderAtlas(); }
 function renameRegion(v){ const r=selected(); if(!r) return; v=(v||'').trim().replace(/[\\/:*?"<>|]/g,'_'); if(!v||v===r.name) return; commit(); r.name=v; renderRegionList(); redraw(); renderAtlas(); }
-function setRegionMode(m){ const r=selected(); if(!r){ const nr=addRegion(true); if(!nr) return; nr.mode=m; bindRegionToUI(); return; } if(r.mode===m) return; commit(); r.mode=m; r.pts=[]; r.closed=false; onRegionGeomChanged(r.id); toast(MODE_INFO[m].label+'：'+MODE_INFO[m].hint); }
-function clearRegionPoints(){ const r=selected(); if(!r||!r.pts.length) return; commit(); r.pts=[]; r.closed=false; onRegionGeomChanged(r.id); }
+function setRegionMode(m){ const r=selected(); if(!r){ const nr=addRegion(true); if(!nr) return; nr.mode=m; bindRegionToUI(); return; } if(r.mode===m) return; commit(); r.mode=m; r.pts=[]; r.bend=[[],[],[],[]]; r.closed=false; onRegionGeomChanged(r.id); toast(MODE_INFO[m].label+'：'+MODE_INFO[m].hint); }
+function clearRegionPoints(){ const r=selected(); if(!r||!r.pts.length) return; commit(); r.pts=[]; r.bend=[[],[],[],[]]; r.closed=false; onRegionGeomChanged(r.id); }
 function rotateRegion(){ const r=selected(); if(!r) return; commit(); r.rot=((r.rot||0)+90)%360; invalidateOrient(r.id); bindRegionToUI(); }
 function flipRegion(axis){ const r=selected(); if(!r) return; commit(); if(axis==='x') r.flipX=!r.flipX; else r.flipY=!r.flipY; invalidateOrient(r.id); }
 function setPOT(n){ const r=selected(); if(!r) return; commit(); r.outW=r.outH=n; r.autoSize=false; bindRegionToUI(); scheduleRegion(r.id,50); renderRegionList(); }
 function estimateSize(r){ if(!isComplete(r)) return null; const d=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y); let w,h;
   if(r.mode==='rect'||r.mode==='ellipse'||r.mode==='poly'){ const b=bboxOf(r.pts); w=b.w; h=b.h; }
+  else if(r.mode==='quad'&&quadBent(r)){ const len=E=>{ let L=0; for(let k=1;k<E.length;k++) L+=d(E[k-1],E[k]); return L; }; const E=[0,1,2,3].map(e=>len(quadEdgeImgPts(r,e,24))); w=(E[0]+E[2])/2; h=(E[1]+E[3])/2; }
   else if(r.mode==='quad'){ const [a,b,c,e]=r.pts; w=(d(a,b)+d(e,c))/2; h=(d(a,e)+d(b,c))/2; }
   else { const [t0,t1,t2,b0,b1,b2]=r.pts; let L=0,prev=t0; for(let t=0.05;t<=1;t+=0.05){ const p=bez(t0,t1,t2,t); L+=d(prev,p); prev=p; } w=L; h=(d(t0,b0)+d(t2,b2))/2; }
   return { w:clamp(Math.round(w/4)*4,16,2048), h:clamp(Math.round(h/4)*4,16,2048) }; }
@@ -1252,8 +1453,9 @@ function guillotine(items,size,pad){
   return out;
 }
 // 新拓好的圖立刻放進圖集第一個空位；已在圖集者只更新尺寸
+function outSize(r){ const swap=r.rot===90||r.rot===270; return swap?{width:r.outH,height:r.outW}:{width:r.outW,height:r.outH}; } // 全解析度的輸出尺寸（低解析度預覽時也用這個排圖集）
 function atlasPlaceIfNew(id){
-  const rt=RT.get(id); if(!rt||!rt.resultCanvas) return; const c=rt.resultCanvas; let p=placementOf(id);
+  const rt=RT.get(id), r=regionById(id); if(!rt||!rt.resultCanvas||!r) return; const c=outSize(r); let p=placementOf(id);
   if(p){ if(!(atlasDrag&&atlasDrag.p===p)){ p.w=c.width; p.h=c.height; } renderAtlas(); return; }
   const size=state.atlas.size, pad=state.atlas.padding; const it={w:c.width,h:c.height};
   const spot=findFreeSpot(it,state.atlas.placements,size,pad);
@@ -1265,15 +1467,25 @@ function atlasDirty(id){ atlasPlaceIfNew(id); }
 function packAtlas(all){
   const items=atlasItems(); if(!items.length){ toast('圖集是空的，先拓一張圖'); return; }
   const size=state.atlas.size, pad=state.atlas.padding; commit();
-  const list=items.map(({r,rt})=>({regionId:r.id,w:rt.resultCanvas.width,h:rt.resultCanvas.height}));
+  const list=items.map(({r})=>{ const o=outSize(r); return {regionId:r.id,w:o.width,h:o.height}; });
   if(all){ state.atlas.placements=guillotine(list,size,pad).map(p=>({regionId:p.regionId,x:p.x,y:p.y,w:p.w,h:p.h,manual:false,overflow:!!p.overflow})); }
   else { const keep=state.atlas.placements.filter(p=>list.some(l=>l.regionId===p.regionId)); const placed=keep.slice();
     for(const it of list){ if(keep.some(p=>p.regionId===it.regionId)) continue; const spot=findFreeSpot(it,placed,size,pad); const p={regionId:it.regionId,w:it.w,h:it.h,manual:false,x:spot?spot.x:0,y:spot?spot.y:0,overflow:!spot}; placed.push(p); keep.push(p); }
     state.atlas.placements=keep; }
   renderAtlas(); const ov=state.atlas.placements.filter(p=>p.overflow).length; toast(ov?`圖集 ${size} 放不下 ${ov} 張，請加大尺寸或縮小輸出`:`已自動排好 ${state.atlas.placements.length} 張`,!!ov);
 }
+// 圖集檢視：AZ.z＝相對「全覽」的倍率，AZ.cx/cy＝畫面中心對到的圖集座標（null＝置中）
+const AZ={z:1,cx:null,cy:null,fit:1}; let atlasPan=null;
 function atlasFit(){ const W=atlasHolder.clientWidth, H=atlasHolder.clientHeight; if(atlasView.width!==W||atlasView.height!==H){ atlasView.width=Math.max(1,W); atlasView.height=Math.max(1,H); }
-  const size=state.atlas.size||1024; const m=18; AV.scale=Math.max(0.01,Math.min((W-m*2)/size,(H-m*2)/size)); AV.ox=Math.floor((W-size*AV.scale)/2); AV.oy=Math.floor((H-size*AV.scale)/2); }
+  const size=state.atlas.size||1024; const m=18; AZ.fit=Math.max(0.01,Math.min((W-m*2)/size,(H-m*2)/size)); AV.scale=AZ.fit*AZ.z;
+  const cx=AZ.cx??size/2, cy=AZ.cy??size/2; AV.fx=W/2-cx*AV.scale; AV.fy=H/2-cy*AV.scale; AV.ox=Math.round(AV.fx); AV.oy=Math.round(AV.fy); }
+function atlasZoomTo(scale,sx,sy){ const size=state.atlas.size||1024; atlasFit(); const W=atlasView.width,H=atlasView.height; sx=sx??W/2; sy=sy??H/2;
+  const a={x:(sx-AV.fx)/AV.scale,y:(sy-AV.fy)/AV.scale}; /* 用未取整的位移算錨點，連續滾輪不漂 */ scale=clamp(scale,Math.min(AZ.fit,0.05)*0.5,16); AZ.z=scale/AZ.fit;
+  AZ.cx=clamp(a.x-(sx-W/2)/scale,0,size); AZ.cy=clamp(a.y-(sy-H/2)/scale,0,size); renderAtlas(); }
+function atlasHome(){ AZ.z=1; AZ.cx=AZ.cy=null; renderAtlas(); }
+atlasView.addEventListener('wheel',e=>{ e.preventDefault(); const s0=AV.scale; let t=s0*(e.deltaY<0?1.15:1/1.15);
+  for(const n of [1,2,4,8,16]) if((s0<n-1e-9&&t>n)||(s0>n+1e-9&&t<n)) t=n; // 經過 100%／200%／400%… 時停在整數倍
+  atlasZoomTo(t,e.offsetX,e.offsetY); },{passive:false});
 const a2s=(x,y)=>({x:AV.ox+x*AV.scale,y:AV.oy+y*AV.scale}); const s2a=(x,y)=>({x:(x-AV.ox)/AV.scale,y:(y-AV.oy)/AV.scale});
 function renderAtlas(){
   atlasFit(); const size=state.atlas.size||1024, sc=AV.scale;
@@ -1284,7 +1496,8 @@ function renderAtlas(){
   actx.fillStyle=night?'#2a2829':'#ffffff'; actx.fillRect(AV.ox,AV.oy,size*sc,size*sc);
   // 棋盤格
   const cs=Math.max(6,32*sc); actx.save(); actx.beginPath(); actx.rect(AV.ox,AV.oy,size*sc,size*sc); actx.clip(); actx.fillStyle=night?'rgba(255,255,255,.05)':'rgba(22,20,21,.06)';
-  for(let y=0,j=0;y<size*sc;y+=cs,j++) for(let x=0,i=0;x<size*sc;x+=cs,i++) if((i+j)%2===0) actx.fillRect(AV.ox+x,AV.oy+y,cs,cs);
+  { const i0=Math.max(0,Math.floor(-AV.ox/cs)), j0=Math.max(0,Math.floor(-AV.oy/cs)), i1=Math.min(Math.ceil(size*sc/cs),Math.ceil((W-AV.ox)/cs)), j1=Math.min(Math.ceil(size*sc/cs),Math.ceil((H-AV.oy)/cs));
+    for(let j=j0;j<j1;j++) for(let i=i0;i<i1;i++) if((i+j)%2===0) actx.fillRect(AV.ox+i*cs,AV.oy+j*cs,cs,cs); }
   // 格線
   if(atlasUI.grid>0){ actx.strokeStyle=night?'rgba(255,255,255,.08)':'rgba(22,20,21,.09)'; actx.lineWidth=1; actx.beginPath(); for(let g=atlasUI.grid;g<size;g+=atlasUI.grid){ const p=a2s(g,0); actx.moveTo(Math.round(p.x)+0.5,AV.oy); actx.lineTo(Math.round(p.x)+0.5,AV.oy+size*sc); actx.moveTo(AV.ox,Math.round(p.y)+0.5); actx.lineTo(AV.ox+size*sc,Math.round(p.y)+0.5); } actx.stroke(); }
   actx.restore();
@@ -1300,16 +1513,21 @@ function renderAtlas(){
   // 邊框與尺寸
   actx.strokeStyle=night?'rgba(255,255,255,.3)':'rgba(22,20,21,.35)'; actx.lineWidth=1; actx.strokeRect(AV.ox+0.5,AV.oy+0.5,size*sc,size*sc);
   const bad=P.filter(p=>p.overlap||p.overflow).length;
-  $('atlasInfo').innerHTML=P.length?`<b>${size}×${size}</b> · ${P.length} 張 · 使用率 ${Math.round(used/(size*size)*100)}%${bad?` · <span style="color:var(--ig-danger)">${bad} 張重疊／超出</span>`:''}`:`<b>${size}×${size}</b> · 空的 — 在右邊照片上點 4 個角，拓下來的圖會自動放進來`;
+  const zoom=`<span class="azoom"><button class="btn xs" onclick="atlasZoomTo(AV.scale/1.25)" title="縮小（滾輪）">－</button><b id="atlasZoomV" title="100%＝圖集 1 像素對螢幕 1 像素">${Math.round(AV.scale*100)}%</b><button class="btn xs" onclick="atlasZoomTo(AV.scale*1.25)" title="放大（滾輪）">＋</button><button class="btn xs" onclick="atlasHome()" title="回全覽 (Home)">全覽</button></span>`;
+  $('atlasInfo').innerHTML=zoom+(P.length?`<b>${size}×${size}</b> · ${P.length} 張 · 使用率 ${Math.round(used/(size*size)*100)}%${bad?` · <span style="color:var(--ig-danger)">${bad} 張重疊／超出</span>`:''}`:`<b>${size}×${size}</b> · 空的 — 在右邊照片上點 4 個角，拓下來的圖會自動放進來`);
 }
 function atlasHit(sp){ const P=state.atlas.placements; const sel=P.find(p=>p.regionId===state.selectedRegionId);
   if(sel){ const s=a2s(sel.x,sel.y); const corners=[[s.x,s.y,'nw'],[s.x+sel.w*AV.scale,s.y,'ne'],[s.x,s.y+sel.h*AV.scale,'sw'],[s.x+sel.w*AV.scale,s.y+sel.h*AV.scale,'se']]; for(const [hx,hy,k] of corners) if(Math.abs(hx-sp.x)<=7&&Math.abs(hy-sp.y)<=7) return {p:sel,handle:k}; }
   for(let i=P.length-1;i>=0;i--){ const p=P[i]; const s=a2s(p.x,p.y); if(sp.x>=s.x&&sp.x<s.x+p.w*AV.scale&&sp.y>=s.y&&sp.y<s.y+p.h*AV.scale) return {p}; } return null; }
 const snapV=v=>{ const g=atlasUI.snap?Math.max(1,atlasUI.grid||4):1; return Math.round(v/g)*g; };
-atlasView.addEventListener('mousedown',e=>{ if(e.button!==0) return; const sp={x:e.offsetX,y:e.offsetY}; const hit=atlasHit(sp); if(!hit) return; e.preventDefault();
+atlasView.addEventListener('mousedown',e=>{ const sp={x:e.offsetX,y:e.offsetY};
+  const startPan=()=>{ e.preventDefault(); atlasFit(); atlasPan={x:e.clientX,y:e.clientY,cx:(atlasView.width/2-AV.ox)/AV.scale,cy:(atlasView.height/2-AV.oy)/AV.scale}; atlasView.classList.add('dragging'); };
+  if(e.button===1||(e.button===0&&(e.shiftKey||spaceDown))){ startPan(); return; } // Shift／空白鍵＋拖曳、中鍵＝平移
+  if(e.button!==0) return; const hit=atlasHit(sp); if(!hit){ if(AZ.z>1.001) startPan(); return; } e.preventDefault();
   const p=hit.p; if(p.regionId!==state.selectedRegionId) selectRegion(p.regionId);
   const a=s2a(sp.x,sp.y); atlasDrag={p,handle:hit.handle,start:a,orig:{x:p.x,y:p.y,w:p.w,h:p.h},pre:snapshot(),moved:false}; atlasView.classList.add('dragging'); });
-window.addEventListener('mousemove',e=>{ if(!atlasDrag) return; const rect=atlasView.getBoundingClientRect(); const a=s2a(e.clientX-rect.left,e.clientY-rect.top); const d=atlasDrag, p=d.p, o=d.orig, size=state.atlas.size;
+window.addEventListener('mousemove',e=>{ if(atlasPan){ const size=state.atlas.size||1024; AZ.cx=clamp(atlasPan.cx-(e.clientX-atlasPan.x)/AV.scale,0,size); AZ.cy=clamp(atlasPan.cy-(e.clientY-atlasPan.y)/AV.scale,0,size); renderAtlas(); return; }
+  if(!atlasDrag) return; const rect=atlasView.getBoundingClientRect(); const a=s2a(e.clientX-rect.left,e.clientY-rect.top); const d=atlasDrag, p=d.p, o=d.orig, size=state.atlas.size;
   const dx=a.x-d.start.x, dy=a.y-d.start.y; if(Math.abs(dx)>0.5||Math.abs(dy)>0.5) d.moved=true;
   if(!d.handle){ p.x=clamp(snapV(o.x+dx),0,Math.max(0,size-p.w)); p.y=clamp(snapV(o.y+dy),0,Math.max(0,size-p.h)); p.manual=true; p.overflow=false; }
   else { const ar=o.w/o.h; let w=o.w,h=o.h,x=o.x,y=o.y; const free=e.altKey;
@@ -1320,7 +1538,7 @@ window.addEventListener('mousemove',e=>{ if(!atlasDrag) return; const rect=atlas
     if(d.handle==='ne'||d.handle==='nw') y=o.y+o.h-h; if(d.handle==='sw'||d.handle==='nw') x=o.x+o.w-w;
     p.w=w; p.h=h; p.x=x; p.y=y; p.manual=true; }
   renderAtlas(); });
-window.addEventListener('mouseup',()=>{ if(!atlasDrag) return; const d=atlasDrag; atlasDrag=null; atlasView.classList.remove('dragging'); if(!d.moved) return;
+window.addEventListener('mouseup',()=>{ if(atlasPan){ atlasPan=null; atlasView.classList.remove('dragging'); } if(!atlasDrag) return; const d=atlasDrag; atlasDrag=null; atlasView.classList.remove('dragging'); if(!d.moved) return;
   if(d.pre!==snapshot()){ history.past.push(d.pre); history.future=[]; updateUndoButtons(); }
   if(d.handle){ const r=regionById(d.p.regionId); if(r){ const swap=r.rot===90||r.rot===270; const nw=Math.round(d.p.w), nh=Math.round(d.p.h); r.outW=swap?nh:nw; r.outH=swap?nw:nh; r.autoSize=false; if(r.id===state.selectedRegionId) bindRegionToUI(); renderRegionList(); scheduleRegion(r.id,30); toast(`重新拓印為 ${nw}×${nh}`); } }
   renderAtlas(); });
@@ -1328,7 +1546,7 @@ atlasView.addEventListener('dblclick',e=>{ const hit=atlasHit({x:e.offsetX,y:e.o
 function removeFromAtlas(){ const p=placementOf(state.selectedRegionId); if(!p) return; commit(); state.atlas.placements=state.atlas.placements.filter(q=>q!==p); renderAtlas(); toast('已從圖集移除（拓印框仍在，按「補排」可放回）'); }
 $('atlasPad').addEventListener('input',e=>{ $('atlasPadV').textContent=e.target.value; });
 $('atlasPad').addEventListener('change',e=>{ commit(); state.atlas.padding=+e.target.value; renderAtlas(); });
-$('atlasSize').addEventListener('change',e=>{ commit(); state.atlas.size=+e.target.value; renderAtlas(); });
+$('atlasSize').addEventListener('change',e=>{ commit(); state.atlas.size=+e.target.value; AZ.z=1; AZ.cx=AZ.cy=null; renderAtlas(); });
 $('atlasDilate').addEventListener('change',e=>{ commit(); state.atlas.dilate=e.target.checked; });
 $('atlasGrid').addEventListener('change',e=>{ atlasUI.grid=+e.target.value; renderAtlas(); });
 $('atlasSnap').addEventListener('change',e=>{ atlasUI.snap=e.target.checked; });
@@ -1362,6 +1580,32 @@ async function exportRegion(r,kind){ const rt=RT.get(r.id); if(!rt||!rt.resultCa
   downloadCanvas(rt.resultCanvas,fname(r,'albedo'));
   if(kind==='pbr'){ const m=await runPBR(r.id); if(!m) return; await sleep(250); downloadCanvas(m.normal,fname(r,'normal')); await sleep(250); downloadCanvas(m.rough,fname(r,'rough')); await sleep(250); downloadCanvas(m.ao,fname(r,'ao')); await sleep(250); downloadCanvas(m.height,fname(r,'height')); } }
 async function exportSelected(kind){ const r=selected(); if(!r){ toast('請先選取選區'); return; } await exportRegion(r,kind); toast(kind==='pbr'?'已匯出 5 張材質':'已匯出貼圖'); }
+/* ---------- ZIP（store-only，不壓縮，零依賴） ---------- */
+const CRC_T=(()=>{ const t=new Uint32Array(256); for(let n=0;n<256;n++){ let c=n; for(let k=0;k<8;k++) c=c&1?0xEDB88320^(c>>>1):c>>>1; t[n]=c>>>0; } return t; })();
+function crc32(u8){ let c=0xFFFFFFFF; for(let i=0;i<u8.length;i++) c=CRC_T[(c^u8[i])&255]^(c>>>8); return (c^0xFFFFFFFF)>>>0; }
+function makeZip(files){ // files: [{name, data:Uint8Array}] → Blob
+  const enc=new TextEncoder(), parts=[], cen=[]; let off=0; const d=new Date();
+  const dtime=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1), ddate=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate();
+  for(const f of files){ const nm=enc.encode(f.name), crc=crc32(f.data), sz=f.data.length;
+    const lh=new DataView(new ArrayBuffer(30)); lh.setUint32(0,0x04034b50,true); lh.setUint16(4,20,true); lh.setUint16(6,0x0800,true); lh.setUint16(8,0,true); lh.setUint16(10,dtime,true); lh.setUint16(12,ddate,true);
+    lh.setUint32(14,crc,true); lh.setUint32(18,sz,true); lh.setUint32(22,sz,true); lh.setUint16(26,nm.length,true); lh.setUint16(28,0,true);
+    const ch=new DataView(new ArrayBuffer(46)); ch.setUint32(0,0x02014b50,true); ch.setUint16(4,20,true); ch.setUint16(6,20,true); ch.setUint16(8,0x0800,true); ch.setUint16(10,0,true); ch.setUint16(12,dtime,true); ch.setUint16(14,ddate,true);
+    ch.setUint32(16,crc,true); ch.setUint32(20,sz,true); ch.setUint32(24,sz,true); ch.setUint16(28,nm.length,true); ch.setUint32(42,off,true);
+    parts.push(lh.buffer,nm,f.data); cen.push(ch.buffer,nm); off+=30+nm.length+sz; }
+  const cenSize=cen.reduce((a,b)=>a+(b.byteLength),0); const eo=new DataView(new ArrayBuffer(22)); eo.setUint32(0,0x06054b50,true); eo.setUint16(8,files.length,true); eo.setUint16(10,files.length,true); eo.setUint32(12,cenSize,true); eo.setUint32(16,off,true);
+  return new Blob([...parts,...cen,eo.buffer],{type:'application/zip'}); }
+const canvasBytes=c=>new Promise(res=>c.toBlob(b=>b.arrayBuffer().then(a=>res(new Uint8Array(a))),'image/png'));
+const baseName=n=>String(n||'image').replace(/\.[^.]+$/,'').replace(/[\\/:*?"<>|]/g,'_');
+async function exportAllZip(kind){ const items=atlasItems(); if(!items.length){ toast('還沒有完成的拓印，先在照片上點 4 個角'); return null; }
+  toast(`正在打包 ${items.length} 張拓印…`); const files=[], used=new Set();
+  const uniq=n=>{ let k=n, i=2; while(used.has(k)){ k=n.replace(/\.png$/,`_${i++}.png`); } used.add(k); return k; };
+  for(const {r,rt} of items){ const src=state.sources.find(s=>s.id===r.sourceId); const pre=baseName(src?src.name:'image')+'_';
+    if(kind==='pbr'){ const m=await runPBR(r.id); files.push({name:uniq(pre+fname(r,'albedo')),data:await canvasBytes(rt.resultCanvas)});
+      if(m) for(const k of ['normal','rough','ao','height']) files.push({name:uniq(pre+fname(r,k)),data:await canvasBytes(m[k])}); }
+    else files.push({name:uniq(pre+r.name+'.png'),data:await canvasBytes(rt.resultCanvas)}); }
+  const src0=state.sources.find(s=>s.id===state.activeSourceId)||state.sources[0]; const zname=`${baseName(src0?src0.name:'pumpkin')}_${kind==='pbr'?'PBR':'拓印'}全部.zip`;
+  const a=document.createElement('a'); a.download=zname; a.href=URL.createObjectURL(makeZip(files)); document.body.appendChild(a); a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); a.remove();
+  toast(`已匯出 ${zname}（${files.length} 張 PNG）`); return {name:zname,files:files.map(f=>f.name)}; }
 async function exportAll(kind){ const items=atlasItems(); if(!items.length){ toast('尚無完成的選區'); return; } for(const {r} of items){ await exportRegion(r,kind); await sleep(300); } toast(`已匯出 ${items.length} 個選區`); }
 function exportAtlas(){ const P=state.atlas.placements; if(!P.length){ toast('圖集是空的，先拓一張圖'); return; } const size=state.atlas.size;
   downloadCanvas(renderAtlasFull('albedo'),`${engine().pre}atlas${engine().albedo}.png`); setTimeout(exportAtlasJSON,300); toast('已匯出圖集 PNG 與 UV JSON'); }
@@ -1395,6 +1639,67 @@ async function loadProject(p){ if(!p||p.app!=='pumpkin-texture-ripper'||!Array.i
   setActiveSource(p.activeSourceId??(state.sources[0]&&state.sources[0].id),true); refreshAll(); state.regions.forEach(r=>scheduleRegion(r.id,30)); renderAtlas(); toast(`已開啟專案：${state.sources.length} 張來源、${state.regions.length} 個選區`); }
 function clearProject(){ if(!confirm('清空全部來源、選區與圖集？此動作無法復原。')) return; state.sources=[]; state.regions=[]; state.selectedRegionId=null; state.activeSourceId=null; state.atlas={size:1024,padding:4,dilate:true,placements:[]}; RT.clear(); sourceStore.clear(); history.past=[]; history.future=[]; updateUndoButtons(); setActiveSource(null,true); refreshAll(); renderAtlas(); }
 
+/* ---------- 範例圖（程序化產生，不含真照片）：斜拍的機器面板＋桶狀標籤 ---------- */
+const SAMPLE_NAME='範例_拓印練習.png';
+const SAMPLE=(()=>{ const cx=1230, R=230, kR=40, yTop=200, a=55*Math.PI/180, sa=Math.sin(a), ca=Math.cos(a), l0=90, l1=470;
+  return { W:1600, H:1000,
+    panel:[{x:150,y:215},{x:805,y:120},{x:850,y:770},{x:110,y:680}],
+    barrel:{ cx,R,kR,yTop,a,l0,l1,
+      quad:[{x:cx-R*sa,y:yTop+l0+kR*ca},{x:cx+R*sa,y:yTop+l0+kR*ca},{x:cx+R*sa,y:yTop+l1+kR*ca},{x:cx-R*sa,y:yTop+l1+kR*ca}],
+      top:{x:cx,y:yTop+l0+kR}, bot:{x:cx,y:yTop+l1+kR} } }; })();
+function sampleFlatPanel(){ const W=800,H=520, c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
+  let g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,'#646a73'); g.addColorStop(1,'#3a3e45'); x.fillStyle=g; x.fillRect(0,0,W,H);
+  x.strokeStyle='rgba(255,255,255,.13)'; x.lineWidth=2; x.beginPath(); for(let i=40;i<W;i+=40){ x.moveTo(i,0); x.lineTo(i,H); } for(let j=40;j<H;j+=40){ x.moveTo(0,j); x.lineTo(W,j); } x.stroke();
+  x.strokeStyle='#202328'; x.lineWidth=10; x.strokeRect(5,5,W-10,H-10);
+  x.fillStyle='#f0b429'; x.font='bold 36px Consolas, monospace'; x.fillText('CONTROL PANEL 07',40,62);
+  x.fillStyle='#0d2b1e'; x.fillRect(40,90,320,160); x.strokeStyle='#111'; x.lineWidth=4; x.strokeRect(40,90,320,160);
+  x.strokeStyle='#4ade80'; x.lineWidth=3; x.beginPath(); for(let i=0;i<=300;i+=4){ const yy=190+Math.sin(i/18)*30*Math.cos(i/70); i?x.lineTo(50+i,yy):x.moveTo(50,yy); } x.stroke();
+  x.fillStyle='#4ade80'; x.font='bold 26px Consolas, monospace'; x.fillText('SYS OK  98%',58,128);
+  [[470,'#c94b3c'],[590,'#d6a531'],[710,'#3c8dc9']].forEach(([kx,col],i)=>{ const rg=x.createRadialGradient(kx-14,156,6,kx,170,46); rg.addColorStop(0,'#e9e9e9'); rg.addColorStop(1,'#77797d'); x.fillStyle=rg; x.beginPath(); x.arc(kx,170,44,0,Math.PI*2); x.fill(); x.strokeStyle='#1d1f22'; x.lineWidth=4; x.stroke();
+    const an=-2.2+i*1.3; x.strokeStyle=col; x.lineWidth=7; x.beginPath(); x.moveTo(kx,170); x.lineTo(kx+Math.cos(an)*36,170+Math.sin(an)*36); x.stroke(); x.fillStyle='#d8d8d8'; x.font='bold 18px Consolas, monospace'; x.fillText(['GAIN','TONE','LEVEL'][i],kx-28,244); });
+  const cols=['#c94b3c','#e3a72f','#3fa35b','#3c8dc9','#8b5cc9','#e7e7e7']; cols.forEach((col,i)=>{ x.fillStyle='#1f2226'; x.fillRect(40+i*122,300,104,64); x.fillStyle=col; x.fillRect(46+i*122,306,92,52); x.fillStyle='#1f2226'; x.font='bold 22px Consolas, monospace'; x.fillText('F'+(i+1),74+i*122,340); });
+  ['#ff4b4b','#4bff7a','#ffd54b','#4bb8ff'].forEach((col,i)=>{ x.fillStyle=col; x.beginPath(); x.arc(70+i*50,420,12,0,Math.PI*2); x.fill(); x.strokeStyle='#111'; x.lineWidth=3; x.stroke(); });
+  x.fillStyle='#d8d8d8'; x.font='bold 24px "Microsoft JhengHei", sans-serif'; x.fillText('範例面板  SAMPLE',300,432);
+  x.fillStyle='#2a2d31'; x.fillRect(40,460,720,30); x.fillStyle='#9aa0a8'; x.font='16px Consolas, monospace'; x.fillText('SN 0000-0000   220V   50/60Hz',54,481);
+  [[24,24],[W-24,24],[W-24,H-24],[24,H-24]].forEach(([sx,sy])=>{ x.fillStyle='#b7b9bd'; x.beginPath(); x.arc(sx,sy,10,0,Math.PI*2); x.fill(); x.strokeStyle='#333'; x.lineWidth=3; x.beginPath(); x.moveTo(sx-6,sy-6); x.lineTo(sx+6,sy+6); x.stroke(); });
+  g=x.createRadialGradient(170,90,10,170,90,520); g.addColorStop(0,'rgba(255,250,235,.38)'); g.addColorStop(1,'rgba(255,250,235,0)'); x.fillStyle=g; x.fillRect(0,0,W,H); // 拍照的打光
+  g=x.createLinearGradient(W,H,W*0.45,H*0.3); g.addColorStop(0,'rgba(0,0,0,.42)'); g.addColorStop(1,'rgba(0,0,0,0)'); x.fillStyle=g; x.fillRect(0,0,W,H);
+  return x.getImageData(0,0,W,H); }
+function sampleFlatLabel(){ const W=660,H=380, c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
+  x.fillStyle='#f3ead2'; x.fillRect(0,0,W,H); x.strokeStyle='#8f846c'; x.lineWidth=2; x.beginPath(); for(let i=1;i<12;i++){ const xx=Math.round(i*W/12); x.moveTo(xx,0); x.lineTo(xx,H); } for(let j=1;j<8;j++){ if(j===4) continue; const yy=Math.round(j*H/8); x.moveTo(0,yy); x.lineTo(W,yy); } x.stroke();
+  x.fillStyle='rgb(210,30,30)'; x.fillRect(0,H/2-4,W,8); // 中線：量測直線度用
+  x.strokeStyle='#3b3326'; x.lineWidth=6; x.strokeRect(3,3,W-6,H-6);
+  x.fillStyle='#2b2a6e'; x.font='bold 64px Consolas, monospace'; x.fillText('OIL · 20L',40,110);
+  x.fillStyle='#3b3326'; x.font='bold 30px "Microsoft JhengHei", sans-serif'; x.fillText('範例標籤  LABEL',40,155);
+  for(let i=0;i<40;i++){ x.fillStyle='#222'; const bw=(i*7)%3+2; x.fillRect(380+i*6.5,260,bw,90); }
+  x.fillStyle='#2b2a6e'; x.font='bold 26px Consolas, monospace'; x.fillText('LOT 07-A',40,300); x.fillText('KEEP DRY',40,340);
+  return x.getImageData(0,0,W,H); }
+function bilin(img,u,v,o,out){ const W=img.width,H=img.height,d=img.data; u=u<0?0:u>W-1.001?W-1.001:u; v=v<0?0:v>H-1.001?H-1.001:v; const x0=u|0,y0=v|0,fx=u-x0,fy=v-y0,i=(y0*W+x0)*4;
+  for(let c=0;c<3;c++) out[o+c]=(d[i+c]*(1-fx)+d[i+4+c]*fx)*(1-fy)+(d[i+W*4+c]*(1-fx)+d[i+W*4+4+c]*fx)*fy; }
+function makeSampleCanvas(){ const S=SAMPLE, W=S.W, H=S.H; const c=document.createElement('canvas'); c.width=W; c.height=H; const x=c.getContext('2d');
+  let g=x.createLinearGradient(0,0,0,H); g.addColorStop(0,'#cfc6b8'); g.addColorStop(0.72,'#b9ae9c'); g.addColorStop(0.72,'#7d6a55'); g.addColorStop(1,'#5e4e3e'); x.fillStyle=g; x.fillRect(0,0,W,H); // 牆＋桌
+  let seed=7; const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647; for(let i=0;i<2500;i++){ x.fillStyle=`rgba(0,0,0,${rnd()*0.06})`; x.fillRect(rnd()*W,rnd()*H,2+rnd()*6,2+rnd()*6); }
+  const img=x.getImageData(0,0,W,H), D=img.data, tmp=new Float32Array(4);
+  // 1) 斜拍的機器面板：單應性反向取樣、2×2 超取樣
+  const pan=sampleFlatPanel(); const Hp=GEO.computeHomography(S.panel), Hi=GEO.invertH(Hp); const bb=S.panel.reduce((b,p)=>({x0:Math.min(b.x0,p.x),y0:Math.min(b.y0,p.y),x1:Math.max(b.x1,p.x),y1:Math.max(b.y1,p.y)}),{x0:1e9,y0:1e9,x1:-1e9,y1:-1e9});
+  for(let y=Math.floor(bb.y0);y<=Math.ceil(bb.y1);y++) for(let xx=Math.floor(bb.x0);xx<=Math.ceil(bb.x1);xx++){ let r=0,gg=0,b=0,n=0;
+    for(let sy=0;sy<2;sy++) for(let sx=0;sx<2;sx++){ const q=GEO.applyH(Hi,xx+0.25+sx*0.5,y+0.25+sy*0.5); if(q.x<0||q.x>1||q.y<0||q.y>1) continue; bilin(pan,q.x*(pan.width-1),q.y*(pan.height-1),0,tmp); r+=tmp[0]; gg+=tmp[1]; b+=tmp[2]; n++; }
+    if(!n) continue; const o=(y*W+xx)*4, t=n/4; D[o]=D[o]*(1-t)+r/4; D[o+1]=D[o+1]*(1-t)+gg/4; D[o+2]=D[o+2]*(1-t)+b/4; }
+  // 2) 桶子（圓柱，俯看一點）＋彎曲標籤
+  const B=S.barrel, lab=sampleFlatLabel(); const shadeOf=th=>Math.max(0,Math.cos(th+0.45));
+  for(let y=B.yTop-B.kR-2;y<=B.yTop+620+B.kR+2;y++) for(let xx=B.cx-B.R-2;xx<=B.cx+B.R+2;xx++){ let r=0,gg=0,b=0,n=0;
+    for(let sy=0;sy<2;sy++) for(let sx=0;sx<2;sx++){ const px=xx+0.25+sx*0.5, py=y+0.25+sy*0.5; const sn=(px-B.cx)/B.R; if(Math.abs(sn)>1) continue; const cs=Math.sqrt(1-sn*sn), th=Math.asin(sn);
+      const wy=py-B.yTop-B.kR*cs; let cr,cg,cb;
+      if(((px-B.cx)/B.R)**2+((py-B.yTop)/B.kR)**2<=1 && wy<0){ cr=150; cg=168; cb=186; } // 桶蓋
+      else if(wy>=0&&wy<=620){ const sh=0.32+0.68*shadeOf(th);
+        if(th>=-B.a&&th<=B.a&&wy>=B.l0&&wy<=B.l1){ bilin(lab,(th+B.a)/(2*B.a)*(lab.width-1),(wy-B.l0)/(B.l1-B.l0)*(lab.height-1),0,tmp); const ls=0.55+0.45*shadeOf(th); cr=tmp[0]*ls; cg=tmp[1]*ls; cb=tmp[2]*ls; }
+        else { const hoop=(wy<34||(wy>560&&wy<590)); cr=(hoop?40:59)*sh*1.4; cg=(hoop?70:110)*sh*1.4; cb=(hoop?100:158)*sh*1.4; } }
+      else continue; r+=cr; gg+=cg; b+=cb; n++; }
+    if(!n) continue; const o=(y*W+xx)*4, t=n/4; D[o]=D[o]*(1-t)+r/4; D[o+1]=D[o+1]*(1-t)+gg/4; D[o+2]=D[o+2]*(1-t)+b/4; }
+  x.putImageData(img,0,0); return c; }
+function loadSample(){ const ex=state.sources.find(s=>s.name===SAMPLE_NAME); if(ex){ setActiveSource(ex.id,true); return ex.id; }
+  const id=registerSource(makeSampleCanvas(),SAMPLE_NAME,'image/png'); return id; }
+
 /* ---------- 預設組 ---------- */
 const BUILTIN_PRESETS={
   '石材／磚':{ seamless:{method:'scatter',blendW:32,lowR:96,patch:72,feather:60}, delight:{enabled:true,radius:96,strength:70,hiMix:0}, pbr:{normalStr:180,aoStr:70,aoR:48,heightBlur:1} },
@@ -1417,8 +1722,13 @@ function renderSourceList(){ const el=$('srcList'); el.innerHTML='';
     d.innerHTML=`<img src="${st?st.thumb:''}" alt=""><span class="n">${s.name}</span><button class="x" title="刪除">✕</button>`;
     d.onclick=e=>{ if(e.target.classList.contains('x')){ deleteSource(s.id); return; } setActiveSource(s.id,true); }; el.appendChild(d); }
   const add=document.createElement('div'); add.className='src add'; add.textContent='＋'; add.title='匯入照片'; add.onclick=()=>$('fileInput').click(); el.appendChild(add); }
-function renderRegionList(){ const el=$('regionList'); el.innerHTML='';
-  if(!state.regions.length){ el.innerHTML='<div class="hint">尚無選區。載入照片後直接在畫布上點 4 個角，或按 <span class="kbd">N</span> 新增。</div>'; return; }
+function renderRipGallery(){ const el=$('rgList'); if(!el) return; el.innerHTML=''; $('rgCount').textContent=state.regions.length;
+  if(!state.regions.length){ el.innerHTML='<div class="empty">每拓一張，這裡就多一張即時縮圖；點縮圖切換目前拓印框。</div>'; return; }
+  for(const r of state.regions){ const rt=RT.get(r.id); const d=document.createElement('div'); d.className='rg'+(r.id===state.selectedRegionId?' sel':''); d.dataset.rid=r.id; d.title=`${r.name}（點選切換）`;
+    d.innerHTML=`<div class="im">${rt&&rt.thumb?`<img src="${rt.thumb}" alt="">`:'<span>未完成</span>'}</div><div class="nm">${r.name}</div><button class="x" title="刪除拓印框">✕</button>`;
+    d.onclick=e=>{ if(e.target.classList.contains('x')){ deleteRegion(r.id); return; } selectRegion(r.id); }; el.appendChild(d); } }
+function renderRegionList(){ renderRipGallery(); const el=$('regionList'); el.innerHTML='';
+  if(!state.regions.length){ el.innerHTML='<div class="hint">尚無拓印框。載入照片（或按「載入範例」）後，直接在畫布上點 4 個角，或按 <span class="kbd">N</span> 新增。</div>'; return; }
   for(const r of state.regions){ const rt=RT.get(r.id); const src=state.sources.find(s=>s.id===r.sourceId); const d=document.createElement('div'); d.className='rcard'+(r.id===state.selectedRegionId?' sel':'');
     const missing=r.mode==='poly'?(r.closed?0:1):(r.mode==='rect'||r.mode==='ellipse')?(r.pts.length<2?1:0):needPts(r)-r.pts.length; const meta=missing>0?`<small class="warn">${r.mode==='poly'?(r.pts.length>=3?'按 Enter 收合':`已點 ${r.pts.length} 點，至少 3 點`):r.mode==='rect'||r.mode==='ellipse'?'在照片上拖出範圍':`還缺 ${missing} 個點`}</small>`:`<small>${r.outW}×${r.outH}${r.rot?' ↻'+r.rot:''} · ${r.seamless.method==='none'?'未無縫':r.seamless.method}${rt&&rt.score!=null?' · '+rt.score+'分':''}</small>`;
     d.innerHTML=`<div class="th">${rt&&rt.thumb?`<img src="${rt.thumb}" alt="">`:'<span>'+(r.mode==='quad'?'▢':'◠')+'</span>'}</div><div class="meta"><b>${r.name}</b>${meta}<small>${MODE_INFO[r.mode].label} · ${src?src.name:'?'}</small></div><button class="del" title="刪除選區 (Del)">✕</button>`;
@@ -1454,7 +1764,45 @@ function gotoStep(n){ if(n===1){ $('fileInput').click(); } else if(n===2){ if(!s
 function toggleTheme(){ const cur=document.documentElement.dataset.theme==='night'?'day':'night'; applyTheme(cur); localStorage.setItem('ptr.theme',cur); }
 function applyTheme(t){ document.documentElement.dataset.theme=t; redraw(); if(typeof renderAtlas==='function'&&state.atlas) try{ renderAtlas(); }catch(e){} }
 function toggleOverlay(name){ const el=$('ov_'+name); el.classList.toggle('show'); }
-function closeOnboarding(){ $('ov_onb').classList.remove('show'); localStorage.setItem('ptr.onb','1'); }
+/* ---------- 教學：4 步導覽（spotlight）＋教學面板 ---------- */
+const TOUR=[
+  { sel:'#secImport', title:'貼照片', text:'截圖後按 Ctrl+V 直接貼進來，或把照片拖進中間深色底的照片區。手邊沒照片也沒關係。', act:'動作：按 Ctrl+V 貼一張截圖——或直接按「下一步」，我們幫你載入範例圖。' },
+  { sel:'#canvasHolder', place:'inside', title:'點 4 個角', text:'在照片上依序點左上 → 右上 → 右下 → 左下，斜的面立刻拓成正面。照片太小先用滾輪放大再點。', act:'看：範例面板的 4 個角正在自動點好——點完就拓平了，左邊圖集已經出現。', enter:()=>tourDemo() },
+  { sel:'#atlasPane', title:'排圖集', text:'拓好的圖自動放進左邊圖集（很多貼圖排在一張大圖上＝UV）。拖曳搬位置、拉外框角上的金色小方塊改尺寸、R 旋轉；滾輪放大、Home 回全覽。', act:'動作：拖曳圖集裡那張面板，換個位置試試。' },
+  { sel:'#btnExportSet', pad:10, title:'匯出', text:'金色「匯出材質組」一次給你 Albedo／Normal／Roughness／AO／Height 五張＋UV JSON，照引擎命名。', act:'動作：按金色「匯出材質組」。更多技巧（彎邊、排 UV、引擎設定）按右上「?」看教學。' },
+];
+let tourI=-1;
+function startTour(i=0){ document.querySelectorAll('.overlay.show').forEach(o=>o.classList.remove('show')); $('ov_onb').classList.add('show'); showTourStep(i); }
+function showTourStep(i){ if(i!==1) finishTourDemo(); tourI=i; const st=TOUR[i];
+  $('tourIdx').textContent=i+1; $('tourTitle').textContent=st.title; $('tourText').textContent=st.text; $('tourAct').textContent=st.act;
+  [...$('tourDots').children].forEach((d,k)=>d.classList.toggle('on',k<=i)); $('tourNext').textContent=i===TOUR.length-1?'完成':'下一步';
+  if(st.enter) st.enter(); positionTour(); }
+function positionTour(){ if(tourI<0) return; const st=TOUR[tourI], el=document.querySelector(st.sel); if(!el) return;
+  const r=el.getBoundingClientRect(), pad=st.pad??6, vw=window.innerWidth, vh=window.innerHeight, sp=$('tourSpot'), card=$('tourCard');
+  Object.assign(sp.style,{left:(r.left-pad)+'px',top:(r.top-pad)+'px',width:(r.width+pad*2)+'px',height:(r.height+pad*2)+'px'});
+  const cw=card.offsetWidth, ch=card.offsetHeight, gap=16; let x, y;
+  if(st.place==='inside'){ x=r.right-cw-gap; y=r.bottom-ch-gap; }
+  else if(r.right+gap+cw<=vw-8){ x=r.right+gap; y=r.top; } else if(r.left-gap-cw>=8){ x=r.left-gap-cw; y=r.top; } else if(r.bottom+gap+ch<=vh-8){ x=r.left; y=r.bottom+gap; } else { x=r.left+(r.width-cw)/2; y=r.top+(r.height-ch)/2; }
+  card.style.left=clamp(x,8,Math.max(8,vw-cw-8))+'px'; card.style.top=clamp(y,8,Math.max(8,vh-ch-8))+'px'; }
+function tourNext(){ if(tourI>=TOUR.length-1){ endTour('done'); toast('導覽完成！隨時按頂欄「教學」重看，按 ? 看教學面板'); return; } showTourStep(tourI+1); }
+function endTour(mode){ cancelTourDemo(); $('ov_onb').classList.remove('show'); tourI=-1;
+  if(mode==='never'||mode==='done') localStorage.setItem('ptr.tour',mode); else { try{ sessionStorage.setItem('ptr.tourSkip','1'); }catch(e){} } }
+function closeOnboarding(){ endTour('never'); localStorage.setItem('ptr.onb','1'); } // 相容舊名（v2.2 測試用）
+let tourDemoState=null; // {rid}：導覽第 2 步自動點角進行中
+async function tourDemo(){ // 導覽第 2 步：載入範例、自動點 4 角、立刻拓出來
+  let src=state.sources.find(s=>s.name===SAMPLE_NAME); const sid=src?src.id:loadSample(); if(src) setActiveSource(sid,true);
+  const ex=state.regions.find(r=>r.sourceId===sid&&r.name==='範例_面板'&&isComplete(r)); if(ex){ selectRegion(ex.id); return; }
+  if(tourDemoState) return;
+  const r=addRegion(true); if(!r) return; r.mode='quad'; r.pts=[]; r.bend=[[],[],[],[]]; r.name='範例_面板'; bindRegionToUI(); renderRegionList();
+  const me={rid:r.id}; tourDemoState=me;
+  for(let k=0;k<4;k++){ await sleep(280);
+    if(tourDemoState!==me || tourI!==1 || !regionById(r.id) || r.pts.length!==k) { if(tourDemoState===me) tourDemoState=null; return; } // 導覽被略過／換步／點數被動過 → 中止
+    r.pts.push({x:SAMPLE.panel[k].x,y:SAMPLE.panel[k].y}); onRegionGeomChanged(r.id); }
+  if(tourDemoState===me) tourDemoState=null; }
+function finishTourDemo(){ const st=tourDemoState; if(!st) return; tourDemoState=null; const r=regionById(st.rid); if(!r||isComplete(r)) return; // 直接補完剩下的角
+  const ok=r.pts.every((p,k)=>p.x===SAMPLE.panel[k].x&&p.y===SAMPLE.panel[k].y); if(!ok) return; r.pts=SAMPLE.panel.map(p=>({x:p.x,y:p.y})); onRegionGeomChanged(r.id); }
+function cancelTourDemo(){ const st=tourDemoState; if(!st) return; tourDemoState=null; const r=regionById(st.rid); if(r&&!isComplete(r)) deleteRegion(r.id); } // 略過：拿掉點到一半的示範框
+function setTut(t){ document.querySelectorAll('.tut-tabs button').forEach(b=>{ const on=b.dataset.tt===t; b.classList.toggle('active',on); if(on&&b.scrollIntoView) b.scrollIntoView({block:'nearest',inline:'nearest'}); }); document.querySelectorAll('.tut-pane').forEach(p=>p.classList.toggle('active',p.dataset.tt===t)); }
 let toastTimer=null; function toast(msg,err){ const t=$('toast'); t.textContent=msg; t.className='show'+(err?' err':''); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.className='',err?3600:2200); }
 function toggleFullscreen(){ if(!document.fullscreenElement) $('app').requestFullscreen().catch(()=>{}); else document.exitFullscreen(); }
 function refreshAll(){ renderSourceList(); renderRegionList(); bindRegionToUI(); redraw(); drawTile(); updateScore(); updateUndoButtons(); updateSteps(); renderPBRThumbs(); updateStatus(); renderAtlas(); }
@@ -1463,7 +1811,7 @@ function refreshAll(){ renderSourceList(); renderRegionList(); bindRegionToUI();
 document.addEventListener('keydown',e=>{
   const tag=(e.target.tagName||'').toLowerCase(); const inText=(tag==='input'&&['text','number','search'].includes(e.target.type))||tag==='textarea'||tag==='select';
   const k=e.key, K=k.toLowerCase(), ctrl=e.ctrlKey||e.metaKey;
-  if(k==='Escape'){ document.querySelectorAll('.overlay.show').forEach(o=>o.classList.remove('show')); if(tag==='input') e.target.blur(); return; }
+  if(k==='Escape'){ document.querySelectorAll('.overlay.show').forEach(o=>o.classList.remove('show')); if(tourI>=0) endTour('skip'); if(tag==='input') e.target.blur(); return; }
   if(ctrl){
     if(K==='z'&&!inText){ e.preventDefault(); e.shiftKey?redo():undo(); return; }
     if(K==='y'&&!inText){ e.preventDefault(); redo(); return; }
@@ -1490,6 +1838,7 @@ document.addEventListener('keydown',e=>{
   if(K==='g'){ togglePreview('gray'); return; }
   if(K==='b'){ togglePreview('before'); return; }
   if(['1','2','3','4','5'].includes(k)){ const r=selected(); if(!r) return; const m=['none','offsetLF','freq','scatter','mirror'][+k-1]; if(r.seamless.method!==m){ commit(); r.seamless.method=m; if(m!=='none') r.seamless.lastMethod=m; bindRegionToUI(); scheduleRegion(r.id,30); toast('無縫方法：'+$('seamMethod').selectedOptions[0].textContent); } return; }
+  if(k==='Home'){ e.preventDefault(); atlasHome(); return; }
   if(k==='+'||k==='='){ zoomBy(1.2); return; } if(k==='-'){ zoomBy(1/1.2); return; } if(k==='0'){ resetView(); return; }
 });
 document.addEventListener('keyup',e=>{ if(e.key===' '){ spaceDown=false; stage.classList.remove('pan'); } });
@@ -1499,7 +1848,9 @@ window.addEventListener('blur',()=>{ spaceDown=false; stage.classList.remove('pa
 (function init(){
   const saved=localStorage.getItem('ptr.theme'); applyTheme(saved||(matchMedia('(prefers-color-scheme: dark)').matches?'night':'day'));
   initWorker(); renderPresets(); initSplitter(); resizeCanvasToHolder(); refreshAll(); onEngineChange(); setGrid(2);
-  if(!localStorage.getItem('ptr.onb')) $('ov_onb').classList.add('show');
+  let skip=false; try{ skip=!!sessionStorage.getItem('ptr.tourSkip'); }catch(e){}
+  if(!localStorage.getItem('ptr.tour') && !skip) startTour(0); // 首次開啟：4 步導覽（略過＝這次不看；不再顯示／完成＝以後不自動出現）
+  window.addEventListener('resize',()=>positionTour());
 })();
 </script>
 </body>

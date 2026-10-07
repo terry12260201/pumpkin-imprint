@@ -9,7 +9,7 @@
   </defs>
   <rect width="1200" height="360" rx="18" fill="#1A1819"/>
   <rect width="1200" height="360" rx="18" fill="url(#dots)"/>
-  <text x="80" y="104" font-family="'SF Mono','Roboto Mono',Consolas,Menlo,monospace" font-size="18" letter-spacing="2" fill="#F7F7F7" opacity="0.68">PUMPKIN VR · 3D TEXTURE TOOL</text>
+  <text x="80" y="104" font-family="'SF Mono','Roboto Mono',Consolas,Menlo,monospace" font-size="18" letter-spacing="2" fill="#F7F7F7" opacity="0.68">PUMPKIN SKILLS · TEXTURE TOOL</text>
   <text x="80" y="182" font-family="'PingFang TC','Microsoft JhengHei','Noto Sans TC','Heiti TC',sans-serif" font-size="64" font-weight="600" fill="#F7F7F7">南瓜拓印 Pumpkin Imprint</text>
   <text x="80" y="248" font-family="'PingFang TC','Microsoft JhengHei','Noto Sans TC','Heiti TC',sans-serif" font-size="26" font-weight="400" fill="#F7F7F7" opacity="0.68">把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR</text>
   <rect x="80" y="288" width="96" height="6" rx="3" fill="url(#gold)"/>
