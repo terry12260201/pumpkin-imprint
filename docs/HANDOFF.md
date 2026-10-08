@@ -1,4 +1,4 @@
-# 接手文件 · 南瓜拓印 Pumpkin Imprint（pumpkin-texture-ripper）
+# 接手文件 · 南瓜拓印工具 · Pumpkin Imprint（pumpkin-texture-ripper）
 
 > 給下一個接手的 AI／工程師。讀完這份＋`SKILL.md` 就能繼續開發，不用再問南瓜背景。最後更新：2026-10-07（PC-02，v2.3 開發手）。
 
@@ -41,14 +41,18 @@
 - **模式** `MODE_INFO`：`quad`（4 點透視 homography；`bend[上,右,下,左]` 每邊 0～2 個校正空間控制點 `{s,d}` → Coons patch，全 0 時走原純單應性迴圈）、`poly`（N 點，`closed` 才完成，外框裁切＋alpha 遮罩）、`rect`／`ellipse`（2 點拖框，遮罩）、`curve`（6 點二次貝茲展平）。
 - **管線**：`extract(base) → delight → seamless → detailRecover／localContrast（僅無縫啟用時）→ colorAdjust = result → rot/flip = resultCanvas → 自動放進圖集 →（按需）PBR／score／平鋪預覽`。快取鍵 `rt.baseKey / procKey / pbrKey`，參數沒變不重算。拖點期間 base 用 ¼ 寬高（慢速模式），放開才全解析度。
 - **幾何共用**：主執行緒 `GEO = new Function('self', worker原始碼 + 'return {...}')`，畫彎邊曲線、換算控制點與 worker 用同一份函式。
-- **教學**：`TOUR[]` 4 步 spotlight（`startTour / endTour / tourDemo`）、`#ov_help` 六分頁（`setTut`）、`loadSample()`＋`SAMPLE` 程序化範例圖。
+- **教學**：`TOUR[]` 4 步 spotlight（`startTour / endTour / tourDemo`）、`#ov_help` 六分頁（`setTut`）、`loadSample(kind)`＋`SAMPLES`（Game Boy／CRT 兩張內嵌照片與座標）、`focusView(pts)` 把照片放大到某區域。
 - **Worker 協定**：主→worker `setSource`／`job{stage:'base'|'proc'|'pbr'}`；worker→主 `progress`／`done`（transferable buffer）；`latestJob` 丟棄過期結果，每個 region 同時只跑一件。
 - **復原**：JSON 快照（不含像素），60 步；滑桿一段拖曳合併成一筆。
 - **圖集**：guillotine best-short-side-fit 自動排；手動拖曳貼齊格線；拉角縮放放開後把 `outW/outH` 改成新尺寸**重新拓印**（不是二次縮放）。檢視可縮放平移（`AZ`、`atlasZoomTo`、`atlasHome`）。`renderAtlasFull(kind)` 出全解析度圖集，非 albedo 的透明區填底色（`ATLAS_BG`）。
 - **ZIP**：`makeZip(files)` 自寫 store-only（CRC32、UTF-8 檔名旗標 0x0800），`exportAllZip('albedo'|'pbr')`。
 - **alpha**：遮罩模式的 alpha 經 `alphaOf / merge(...,alpha)` 全管線保留，PBR 四張也帶。
 
-## 5. 目前狀態（v2.3，2026-10-07）
+## 5. 目前狀態（v2.3.2，2026-10-07）
+
+**v2.3.2**：repo 公開，為避免真人作品與真實海報，範例換成南瓜提供的 AI 生成示意圖（無真實品牌）：`docs/samples/gameboy_v2.png`、`crt_v2.png`；舊照片與作者署名全部刪除。新 CRT 圖的螢幕邊緣發光、不規則，A2（彎邊貼合 < 2px）在這張圖上不成立，見日誌紅旗。
+
+**v2.3.1**（南瓜看過 v2.3 後的三項指示）：工具名稱「南瓜拓印工具 · Pumpkin Imprint」顯示在頂欄、`<title>`、導覽卡、教學面板；範例換成南瓜提供的兩張照片（`docs/samples/` 原檔；base64 內嵌於 `index.html`）：Game Boy（平面四點）、CRT 電視（彎邊四點），程序化範例全刪；README 依 GitHub 圖文寫手格式更新。南瓜原話：「你的範例好醜，不要用那些圖」。
 
 **v2.3 新增**（SPEC：`_crew/SPEC_v2.3.md`，南瓜原話「參考版本優秀的內容加進來」「每款工具都需要使用教學和方法，以人為本」）：
 - 可彎邊四點框（瓶身／桶身標籤拉平）、右欄拓印清單、圖集縮放平移、匯出全部拓印 ZIP、拖點 ¼ 解析度預覽（M1）。
@@ -62,8 +66,9 @@ v2.2 以前已完成且仍通過：多來源＋Ctrl+V、五種拓印模式、拓
 1. 「很難用、只會出無縫圖、不能轉不能排」→ 改成拓印優先：無縫改選配預設關；圖集移到主畫面左半可拖可縮可轉。
 2. 「不要只限四點，要多點、矩形、圓形框選」→ 加 poly／rect／ellipse。
 3. 「整合匯出要含 Normal／AO／Roughness」→ 圖集「匯出材質組」。
-4. 「紋理撕裂機太誇張恐怖」→ 改名「南瓜拓印 Pumpkin Imprint」（備選：南瓜採貼 Pumpkin Harvest、南瓜取材）。**名字南瓜尚未正式拍板**，要換只改 `<title>`、header `title`、`README.md`／`SKILL.md`（v2.3 起上手視窗改成導覽卡，沒有大標題）。
+4. 「紋理撕裂機太誇張恐怖」→ 改名「南瓜拓印 Pumpkin Imprint」（v2.3.1 起顯示名「南瓜拓印工具 · Pumpkin Imprint」）（備選：南瓜採貼 Pumpkin Harvest、南瓜取材）。**名字南瓜尚未正式拍板**，要換只改 `<title>`、header `title`、`README.md`／`SKILL.md`（v2.3 起上手視窗改成導覽卡，沒有大標題）。
 5. 「我完全不會用，你沒有給操作手法；以人為本」→ v2.3 教學系統（導覽、範例圖、教學面板、docs/教學.md）。
+6. 「工具名稱要顯示在網頁上」「範例好醜，用我給的兩張照片」→ v2.3.1 改名顯示＋Game Boy／CRT 範例。
 
 ## 6. 沒做／已知限制（下一步候選，v2.3 更新）
 
@@ -116,6 +121,7 @@ PC-02 不用 npm i：Playwright 已全域安裝，設 `NODE_PATH=%APPDATA%\npm\n
 | `docs/教學.md`、`docs/img/tut_*.png` | 同事上手教學與 12 張截圖 |
 | `docs/readme/` | README 的 Banner 與截圖（`images/*-framed.png`） |
 | `_crew/` | v2.3 規格與開發日誌 |
-| `tests/` | Playwright 腳本（`test2.js`、`test3.js`、`algo.js`；不帶參數時預設測 repo 根目錄的 `index.html`）。`test4.js`、`docs_shots.js` 目前只在 PC-02 開發副本 `_test_shots\` |
+| `tests/` | Playwright 腳本（`test4.js` v2.3 驗收、`test2.js`、`test3.js`、`algo.js`；不帶參數時預設測 repo 根目錄的 `index.html`）；`tests/v2.2/index_v2.2.html` 是 A1 像素比對基準。`docs_shots.js`（教學截圖）、`readme_shots.js`（README 截圖）在 PC-02 開發副本 `_test_shots\` |
+| `_crew/check/qa/QA報告.md` | QA 第 1 輪報告（QA 腳本 `qa.cjs` 在開發副本 `_crew\check\qa\`） |
 
-**改工具後的同步順序**：開發副本 `E:\Claude\Terry_Agent\pumpkin-texture-ripper\` → 本 repo（正本）→ 本機 `~/.claude/skills/pumpkin-texture-ripper/` 與 vault `_系統/skills/pumpkin-texture-ripper/`。push 前先問南瓜。公開 repo 不放憑證、真人全名、客戶資料；範例圖一律程序化產生。
+**改工具後的同步順序**：開發副本 `E:\Claude\Terry_Agent\pumpkin-texture-ripper\` → 本 repo（正本）→ 本機 `~/.claude/skills/pumpkin-texture-ripper/` 與 vault `_系統/skills/pumpkin-texture-ripper/`。push 前先問南瓜。公開 repo 不放憑證、真人全名、客戶資料；範例只用南瓜提供的兩張 AI 生成示意圖（Game Boy、CRT 電視，無真實品牌；原檔在開發副本 `docs/samples/`），**不要換成 GG 等內部專案素材、真人作品或真實海報**。

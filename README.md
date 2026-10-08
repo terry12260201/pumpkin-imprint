@@ -1,23 +1,24 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/readme/banner-dark.svg">
-  <img src="docs/readme/banner-light.svg" width="100%" alt="南瓜拓印 Pumpkin Imprint：把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR">
+  <img src="docs/readme/banner-light.svg" width="100%" alt="南瓜拓印工具 · Pumpkin Imprint：把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR">
 </picture>
 
-<h1 align="center">🎃 南瓜拓印 · Pumpkin Imprint</h1>
+<h1 align="center">🎃 南瓜拓印工具 · Pumpkin Imprint</h1>
 
-<p align="center"><b>把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR</b><br>瓶身、桶身這種彎的標籤也能攤平。單一 HTML、免安裝、可離線。</p>
+<p align="center"><b>把歪照片拓成正面貼圖，排好 UV，一鍵出五張 PBR</b><br>微微鼓起的 CRT 螢幕、瓶身、桶身標籤也能貼著弧線拓下來。單一 HTML、免安裝、可離線。</p>
 
 <h2 align="center"><a href="https://terry12260201.github.io/pumpkin-imprint/">▶ 線上直接用（免安裝，打開就能拓）</a></h2>
 
 <p align="center">
   <a href="https://terry12260201.github.io/pumpkin-imprint/"><img src="https://img.shields.io/badge/▶%20線上直接用-免安裝-FDC302?style=flat-square&labelColor=161415" alt="線上直接用"></a>
-  <img src="https://img.shields.io/badge/版本-v2.3-F5F5F5?style=flat-square&labelColor=161415" alt="版本 v2.3">
+  <img src="https://img.shields.io/badge/版本-v2.3.2-F5F5F5?style=flat-square&labelColor=161415" alt="版本 v2.3.2">
   <img src="https://img.shields.io/badge/形式-單一%20HTML%20·%20可離線-F5F5F5?style=flat-square&labelColor=161415" alt="形式：單一 HTML、可離線">
   <img src="https://img.shields.io/badge/輸出-PBR%20×5%20+%20UV%20JSON%20+%20ZIP-F5F5F5?style=flat-square&labelColor=161415" alt="輸出：PBR 五張、UV JSON、ZIP">
 </p>
 
 <p align="center">
   <a href="#-四個步驟">四個步驟</a> •
+  <a href="#-範例圖game-boy-與-crt-電視">範例圖</a> •
   <a href="#-彎的面瓶身桶身標籤">彎的面</a> •
   <a href="#-第一次用內建教學">內建教學</a> •
   <a href="docs/教學.md">同事上手教學</a> •
@@ -26,14 +27,14 @@
 
 做 3D 模型貼圖時，手邊常常只有一張照片：機器面板、木箱、瓶身標籤、一面牆。照片裡的東西是歪的、有透視、有光影，還得自己排 UV。
 
-南瓜拓印把這整段收進一個網頁：**點四個角把歪的面拉正，拓下來自動排進圖集，再一鍵匯出 Albedo、Normal、Roughness、AO、Height 五張貼圖**，照 Unity、Unreal、Blender 的命名規則存好。看完這頁，你可以直接用線上版拓出第一張貼圖，或把它當成 skill 交給 AI 繼續改。
+南瓜拓印工具把這整段收進一個網頁：**點四個角把歪的面拉正，拓下來自動排進圖集，再一鍵匯出 Albedo、Normal、Roughness、AO、Height 五張貼圖**，照 Unity、Unreal、Blender 的命名規則存好。看完這頁，你可以直接用線上版拓出第一張貼圖，或把它當成 skill 交給 AI 繼續改。
 
 <p align="center">
-  <img src="docs/readme/images/ui-light-framed.png" width="880" alt="南瓜拓印主畫面：照片上框出金屬面板、木箱和圓形貼紙三個拓印框，左邊圖集已經排好拉正後的三張貼圖，下方是平鋪預覽">
-  <br><sub>▲ 中間框照片、左邊排圖集、下面看平鋪效果。示範照片是程式產生的模擬圖</sub>
+  <img src="docs/readme/images/ui-light-framed.png" width="880" alt="南瓜拓印工具主畫面：中間是 Game Boy 範例圖，主機綠色螢幕和 OCEAN TIDES 卡帶標籤各有一個拓印框，左邊圖集已經排好拉正後的 Game Boy 螢幕、卡帶標籤和 CRT 螢幕">
+  <br><sub>▲ 中間框照片、左邊排圖集、右上看每張拓印。範例圖：南瓜提供（AI 生成示意圖，無真實品牌）</sub>
 </p>
 
-<!-- 🎬 影片位：20–40 秒操作錄影（建議：載入範例 → 點四角 → 拉彎桶身標籤 → 匯出材質組）。
+<!-- 🎬 影片位：20–40 秒操作錄影（建議：載入範例 Game Boy → 點螢幕四角 → 換 CRT 拉彎邊 → 匯出材質組）。
      上架方式：在 GitHub 網頁編輯這個 README，把 mp4 拖進編輯框（≤ 10MB），
      會產生 https://github.com/user-attachments/assets/… 網址，單獨放一行取代這段註解。 -->
 
@@ -43,8 +44,9 @@
 
 - [它在做什麼](#-它在做什麼)
 - [怎麼開始](#-怎麼開始)
+- [範例圖：Game Boy 與 CRT 電視](#-範例圖game-boy-與-crt-電視)
 - [四個步驟](#-四個步驟)
-- [彎的面：瓶身、桶身標籤](#-彎的面瓶身桶身標籤)
+- [彎的面：CRT 螢幕、瓶身、桶身標籤](#-彎的面瓶身桶身標籤)
 - [要平鋪的材質：無縫化](#-要平鋪的材質無縫化)
 - [第一次用：內建教學](#-第一次用內建教學)
 - [其他好用的](#-其他好用的)
@@ -63,8 +65,8 @@
 
 <table>
   <tr>
-    <td align="center" width="50%"><img src="docs/readme/images/before-photo-framed.png" alt="拓印前：照片裡斜斜的金屬面板，有透視變形"><br><sub>拓印前：照片裡歪斜、有透視的面板</sub></td>
-    <td align="center" width="50%"><img src="docs/readme/images/after-panel-framed.png" alt="拓印後：同一塊面板被拉成完全正面的矩形貼圖，文字和斜紋都變直"><br><sub>拓印後：點四個角，拉成正面貼圖</sub></td>
+    <td align="center" width="50%"><img src="docs/readme/images/before-photo-framed.png" alt="拓印前：Game Boy 範例圖裡斜放的主機，綠色像素螢幕有透視變形"><br><sub>拓印前：照片裡斜放、有透視的 Game Boy 螢幕</sub></td>
+    <td align="center" width="50%"><img src="docs/readme/images/after-panel-framed.png" alt="拓印後：Game Boy 螢幕被拉成完全正面的矩形貼圖，勇者與綠色飛龍的像素畫面都變正，用像素風取樣放大 4 倍也不糊"><br><sub>拓印後：點四個角拉成正面；勾「像素風」放大 4 倍也不糊</sub></td>
   </tr>
 </table>
 
@@ -72,9 +74,9 @@
 
 | 你手上有 | 拓印給你 |
 |---|---|
-| 一張斜拍的機器面板照片 | 一張正面的面板貼圖，放在圖集裡 |
-| 一個圓油桶上的標籤 | 攤平的標籤貼圖，格線是直的 |
-| 一面要重複鋪滿的磚牆 | 四邊接得起來的無縫材質，附接縫分數 |
+| 一張斜放的掌機、卡帶標籤照片 | 一張正面的螢幕／標籤貼圖，放在圖集裡 |
+| 一台螢幕微微鼓起的 CRT 電視、瓶身標籤 | 貼著弧形邊拓下來的貼圖，邊緣不會被切掉 |
+| 一片要重複鋪滿的材質（像滿桌卡帶） | 四邊接得起來的無縫材質，附接縫分數 |
 | 一整張排好的圖集 | Albedo／Normal／Roughness／AO／Height 五張＋記錄每塊位置的 UV JSON |
 
 ---
@@ -88,10 +90,31 @@
 | **線上版** | 打開 [terry12260201.github.io/pumpkin-imprint](https://terry12260201.github.io/pumpkin-imprint/) | 想馬上試、不想下載 |
 | **離線版** | 下載這個 repo，雙擊根目錄的 `index.html` | 斷網環境、公司內網、想自己改 |
 
-**做對的話**，第一次打開會跳出「新手導覽」第 1 步，左上的「來源照片」區塊會亮起來。手邊沒照片，按「**載入範例**」就有一張斜拍的機器面板＋油桶標籤可以練（程式畫的，不是真照片）。
+**做對的話**，頂欄 Logo 右邊會看到「**南瓜拓印工具**」，第一次打開會跳出「新手導覽」第 1 步，左上的「來源照片」區塊會亮起來。手邊沒照片，按「**載入範例 ▾**」選 Game Boy 或 CRT 電視就能練（見下一節）。
 
 > [!TIP]
 > 用 Chrome 或 Edge。照片解析度越高，拓出來越清楚；拍的時候盡量正面一點、光線平均一點。
+
+---
+
+## 🎮 範例圖：Game Boy 與 CRT 電視
+
+工具內建兩張練習圖，不用自己找圖。左欄「**載入範例 ▾**」或空畫布中央的按鈕都能開：
+
+| 範例 | 練什麼 | 怎麼練 |
+|---|---|---|
+| **Game Boy**（主機＋一堆虛構卡帶） | 平面四點 | 點主機綠色螢幕的 4 個角，或挑任何一片卡帶標籤（DRAGONVALE、OCEAN TIDES……）。新手導覽第 2 步會自動幫你點好螢幕 |
+| **CRT 電視**（播著 SUNSET PLAYGROUND 海報，螢幕微微鼓起） | 彎邊四點 | 點螢幕 4 個角，再把四條邊中間的小圓拖到螢幕真正的弧形邊，見[彎的面](#-彎的面瓶身桶身標籤) |
+
+<p align="center">
+  <img src="docs/readme/images/sample-menu-framed.png" width="860" alt="空畫布中央寫著還沒有照片，下方有範例 Game Boy 與範例 CRT 電視兩顆按鈕；左欄的載入範例下拉選單也列出兩張範例與用途">
+  <br><sub>▲ 空畫布中央兩顆範例按鈕，左欄「載入範例 ▾」也能選</sub>
+</p>
+
+**做對的話**，照片出現在中間照片區，左上「來源照片」多一張縮圖，下方提示「已載入範例」。
+
+> [!NOTE]
+> 範例圖：南瓜提供（AI 生成示意圖，無真實品牌）。以縮小後的 JPEG 內嵌在 `index.html` 裡，所以工具仍是單一檔案、離線可用。
 
 ---
 
@@ -128,7 +151,7 @@ flowchart LR
 **做對的話**，框好的瞬間左邊圖集就出現拉正後的圖，右上「**拓印清單**」也多一張縮圖，不用按任何按鈕。點歪了就拖角點微調；拖的時候先用 ¼ 解析度預覽，放開才算全解析度，所以很順。
 
 <p align="center">
-  <img src="docs/readme/images/rip-gallery-framed.png" width="860" alt="拓好的機器面板已放進左邊圖集，右上拓印清單出現它的縮圖，照片上留著金色的四點框">
+  <img src="docs/readme/images/rip-gallery-framed.png" width="860" alt="拓好的 Game Boy 螢幕和 OCEAN TIDES 卡帶標籤已放進左邊圖集，右上拓印清單出現兩張縮圖，照片上留著金色的四點框">
   <br><sub>▲ 拓完立刻進圖集，右上拓印清單看得到每一張的結果，點縮圖就切換</sub>
 </p>
 
@@ -149,7 +172,7 @@ flowchart LR
 兩張重疊或超出圖集會標紅，匯出前清掉。
 
 <p align="center">
-  <img src="docs/readme/images/atlas-zoom-framed.png" width="860" alt="圖集放大到 200% 精修：面板與桶身標籤兩張貼圖，底部顯示縮放比例與全覽按鈕">
+  <img src="docs/readme/images/atlas-zoom-framed.png" width="860" alt="圖集放大精修：CRT 螢幕、Game Boy 螢幕、卡帶標籤三張貼圖排在一起，底部顯示縮放比例與全覽按鈕">
   <br><sub>▲ v2.3 起圖集可以放大檢視，4096 的大圖集上小張貼圖也能精修</sub>
 </p>
 
@@ -182,32 +205,32 @@ flowchart LR
 
 ## 🥫 彎的面：瓶身、桶身標籤
 
-這是 v2.3 最大的新功能。一般四點框的邊是直的，拿來拓油桶上的標籤，中間的線還是彎的：
+v2.3 最大的新功能，用範例「**CRT 電視**」練最清楚。一般四點框的邊是直的，拿來拓微微鼓起的 CRT 螢幕，框線會切進弧形邊裡面，螢幕邊緣一圈被吃掉：
 
 <table>
   <tr>
-    <td align="center" width="50%"><img src="docs/readme/images/bend-before-framed.png" alt="用直的四點框拓油桶標籤：拓出來的標籤中間紅線仍然是彎曲的"><br><sub>直的四點框：紅線還是彎的</sub></td>
-    <td align="center" width="50%"><img src="docs/readme/images/bend-after-framed.png" alt="上下邊各加一個控制點、貼著標籤弧形邊：圖集裡的標籤攤平，紅線變直、格線變方"><br><sub>上下邊各拉一個控制點：標籤攤平</sub></td>
+    <td align="center" width="50%"><img src="docs/readme/images/bend-before-framed.png" alt="用直的四點框拓 CRT 電視螢幕：金色框線是直的，切進螢幕往外鼓的弧形邊裡面"><br><sub>直的四點框：框線切進弧形邊</sub></td>
+    <td align="center" width="50%"><img src="docs/readme/images/bend-after-framed.png" alt="四條邊各拉一個控制點後，金色框線貼著 CRT 螢幕的弧形邊，邊緣內容整片拓進圖集"><br><sub>四條邊各拉一個控制點：貼著弧形邊</sub></td>
   </tr>
 </table>
 
 做法：
 
-1. **先用滾輪把桶子放大**到佔滿照片區。物件太小時弧度只有幾個像素，很難拉準。
-2. 照常點標籤的 4 個角。
-3. 框被選取時，每條邊中間有一顆**小圓點**。按住上邊的小圓，拖到照片上標籤真正的邊緣，讓框線貼著弧形邊。從上往下看的桶子，上邊通常要往**下**拖。下邊一樣處理。
+1. **先用滾輪把螢幕放大**到佔滿照片區。物件太小時弧度只有幾個像素，很難拉準。
+2. 照常點螢幕的 4 個角。
+3. 框被選取時，每條邊中間有一顆**小圓點**。按住它，拖到照片上螢幕真正的弧形邊，讓金色框線貼著邊。CRT 螢幕往外鼓，所以上邊往**上**拖、左邊往**左**拖；從上往下看的瓶身、桶身標籤，上邊通常要往**下**拖。
 4. 看控制點顏色：**金色＝這條邊有彎**，**白色＝目前是直線**。把彎的點拖回直線附近，會自動吸回直線、變白。
 
-**做對的話**，左邊圖集裡標籤的紅線變直、格線變方。每條邊最多 2 個控制點；<kbd>Alt</kbd>＋點邊可以在任何位置加點，<kbd>Alt</kbd>＋點控制點刪除。
+**做對的話**，金色框線和照片上的螢幕邊緣貼在一起，左邊圖集裡的螢幕邊緣是完整的。一個點貼不齊（弧度不對稱）就 <kbd>Alt</kbd>＋點同一條邊加第 2 個；每條邊最多 2 個，<kbd>Alt</kbd>＋點控制點刪除。
 
 <details>
 <summary><b>🔍 它怎麼算的（給好奇的人）</b></summary>
 
 先用 4 個角算出透視校正矩陣，把控制點換算到「已經拉正的方框」裡，每個點記成「沿邊位置 s＋垂直邊的偏移 d」。四條邊各自變成一條過端點與控制點的曲線，再用 Coons patch（四條邊界曲線混合成一個曲面）算出每個輸出像素該去原圖哪裡取樣。
 
-所有控制點都是直線（d＝0）時，程式走回 v2.2 的純透視校正迴圈，實測輸出和 v2.2 **像素完全相同**，不會因為加了新功能而退步。範例油桶標籤的中線直線度從 4.8px 誤差降到 0.5px。
+所有控制點都是直線（d＝0）時，程式走回 v2.2 的純透視校正迴圈，實測輸出和 v2.2 **像素完全相同**，不會因為加了新功能而退步。範例 CRT 螢幕實測：直四點的框線離螢幕弧形邊約 10–16px，四條邊各拉一個控制點後，大部分位置貼到 1.5px 以內（這張圖的螢幕邊有發光，少數位置會差幾 px）。
 
-**還做不到**：只校正「垂直邊」的彎曲，沿邊方向的疏密不處理，所以圓柱兩側的格子會比中間窄。要精確的圓柱展開，改用曲線 <kbd>C</kbd> 模式。
+**還做不到**：只校正「邊」的彎曲，邊框裡面的內容是用四條邊混合推出來的；真實 CRT 畫面中央的弧度不一定跟邊一致，所以裡面的橫線不保證全直。圓柱類只處理垂直邊方向的彎曲，沿邊方向的疏密不處理；要精確的圓柱展開，改用曲線 <kbd>C</kbd> 模式。
 </details>
 
 ---
@@ -218,8 +241,8 @@ flowchart LR
 
 <table>
   <tr>
-    <td align="center" width="50%"><img src="docs/readme/images/tile-before-framed.png" alt="無縫化前：磚牆平鋪 3×3，每塊交界都有明顯的亮暗斷層"><br><sub>處理前：接縫品質 <b>0</b> 分</sub></td>
-    <td align="center" width="50%"><img src="docs/readme/images/tile-after-framed.png" alt="無縫化後：同一面磚牆平鋪 3×3，交界的斷層消失"><br><sub>無縫化後：<b>100</b> 分</sub></td>
+    <td align="center" width="50%"><img src="docs/readme/images/tile-before-framed.png" alt="無縫化前：Game Boy 範例圖裡一堆卡帶的區塊平鋪 3×3，每塊交界都有明顯的斷層"><br><sub>處理前：接縫品質 <b>0</b> 分</sub></td>
+    <td align="center" width="50%"><img src="docs/readme/images/tile-after-framed.png" alt="無縫化後：同一塊卡帶區塊平鋪 3×3，交界的斷層消失"><br><sub>無縫化後：<b>100</b> 分</sub></td>
   </tr>
 </table>
 
@@ -240,7 +263,7 @@ v2.3 加了兩支滑桿：「**細節回復**」把混合後接縫處被抹糊�
 <details>
 <summary><b>🖼️ 看無縫化時的完整畫面</b></summary>
 
-<p align="center"><img src="docs/readme/images/ui-seamless-framed.png" width="860" alt="無縫化設定畫面：右欄勾選啟用無縫化、選擇方法與參數，下方平鋪預覽顯示 3×3 磚牆與 100 分"></p>
+<p align="center"><img src="docs/readme/images/ui-seamless-framed.png" width="860" alt="無縫化設定畫面：右欄勾選啟用無縫化、細節回復 50，下方平鋪預覽顯示 3×3 卡帶區塊與 100 分"></p>
 </details>
 
 ---
@@ -251,15 +274,15 @@ v2.3 起，工具本身就會教你用，不用先讀文件。
 
 | 教學 | 在哪 | 內容 |
 |---|---|---|
-| 新手導覽 | 第一次打開自動出現；頂欄「**教學**」重開 | 4 步：貼照片 → 點四角 → 排圖集 → 匯出。第 2 步會自動幫你點好範例面板的 4 個角 |
-| 範例圖 | 左欄或空畫布中央的「載入範例」 | 斜拍機器面板＋油桶標籤，程式畫的 |
+| 新手導覽 | 第一次打開自動出現；頂欄「**教學**」重開 | 4 步：貼照片 → 點四角 → 排圖集 → 匯出。第 2 步會自動載入 Game Boy 範例、點好螢幕的 4 個角 |
+| 範例圖 | 左欄「載入範例 ▾」或空畫布中央 | Game Boy（平面四點）、CRT 電視（彎邊四點） |
 | 教學面板 | 按 <kbd>?</kbd> | 六個分頁：30 秒上手、五種框法何時用、排 UV 訣竅、匯出到引擎、名詞表、快捷鍵 |
 | 圖文教學 | [docs/教學.md](docs/教學.md) | 給同事的 8 段步驟＋12 張截圖，照著做 5 分鐘上手 |
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/readme/images/tour-step1-framed.png" alt="新手導覽第 1 步：來源照片區塊被亮框框起，旁邊的卡片寫著貼照片的方法，下方有下一步、略過、不再顯示三顆按鈕"></td>
-    <td width="50%"><img src="docs/readme/images/help-panel-framed.png" alt="教學面板的 30 秒上手分頁：八行白話步驟，上方是六個分頁標籤"></td>
+    <td width="50%"><img src="docs/readme/images/tour-step1-framed.png" alt="新手導覽第 1 步：來源照片區塊被亮框框起，旁邊的卡片寫著南瓜拓印工具新手導覽與貼照片的方法，下方有下一步、略過、不再顯示三顆按鈕"></td>
+    <td width="50%"><img src="docs/readme/images/help-panel-framed.png" alt="南瓜拓印工具教學面板的 30 秒上手分頁：八行白話步驟，上方是六個分頁標籤"></td>
   </tr>
   <tr>
     <td align="center"><sub>新手導覽：亮起來的地方就是現在要看的</sub></td>
@@ -283,7 +306,7 @@ v2.3 起，工具本身就會教你用，不用先讀文件。
 | 🌗 去光影 | 右欄「補光」減弱照片裡不均勻的打光，讓貼圖在 3D 裡重新打光更自然 |
 
 <p align="center">
-  <img src="docs/readme/images/ui-dark-framed.png" width="760" alt="夜間模式：深色介面，金屬面板、木箱、貼紙排在圖集裡">
+  <img src="docs/readme/images/ui-dark-framed.png" width="760" alt="夜間模式：深色介面，Game Boy 範例圖上有拓印框，圖集裡排著 CRT 螢幕、Game Boy 螢幕與卡帶標籤">
   <br><sub>▲ 夜間模式</sub>
 </p>
 
@@ -378,19 +401,20 @@ flowchart LR
 
 | 路徑 | 做什麼 |
 |---|---|
-| [index.html](index.html) | **工具本體，唯一要改的程式檔**（約 1860 行、175KB）。GitHub Pages 直接發佈它 |
+| [index.html](index.html) | **工具本體，唯一要改的程式檔**（約 1840 行、約 1.1MB，其中約 960KB 是兩張 base64 範例圖）。GitHub Pages 直接發佈它 |
 | [SKILL.md](SKILL.md) | skill 正本：功能對照表、程式分區、快捷鍵、維護規則、驗收紀錄。Claude Code 載入要它在根目錄 |
 | [docs/HANDOFF.md](docs/HANDOFF.md) | 接手文件：硬性限制、資料模型、管線、南瓜給過的回饋、怎麼測 |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | 只剩一行，指向 SKILL.md（避免兩份維護指南不同步） |
 | [docs/教學.md](docs/教學.md)、`docs/img/tut_*.png` | 給同事的上手教學與 12 張截圖 |
 | `docs/readme/` | 這份 README 的 Banner 與加框截圖 |
 | [_crew/SPEC_v2.3.md](_crew/SPEC_v2.3.md)、[_crew/日誌.md](_crew/日誌.md) | v2.3 規格（含驗收清單）與開發／QA 日誌 |
-| `tests/` | Playwright 腳本：`test2.js` 全流程、`test3.js` 多點／矩形／橢圓、`algo.js` 無縫法比較 |
+| `tests/` | Playwright 腳本：`test4.js` v2.3 驗收（A1–A6、B1、C1–C5 等）、`test2.js` 全流程、`test3.js` 多點／矩形／橢圓、`algo.js` 無縫法比較；`tests/v2.2/index_v2.2.html` 是 A1 像素比對基準 |
+| [_crew/check/qa/QA報告.md](_crew/check/qa/QA報告.md) | QA 第 1 輪報告（含教學可用性 10 條建議，已全部處理） |
 
 ### SKILL.md 摘要
 
 - **觸發詞**：開拓印／紋理工具／貼圖工具、撕裂機、texture ripper、從照片擷取貼圖、透視校正、彎邊四點、瓶身桶身標籤拉平、多點／矩形／橢圓框選、圖集 atlas、無縫 seamless、去光影 de-light、normal map、PBR 材質組、拓印教學、修改／擴充紋理撕裂機。
-- **skill 名稱**是 `pumpkin-texture-ripper`（舊名紋理撕裂機，資料夾名沿用），工具對外名稱是「南瓜拓印 Pumpkin Imprint」。名字南瓜還沒正式拍板，要換只改 `<title>`、header、README、SKILL。
+- **skill 名稱**是 `pumpkin-texture-ripper`（舊名紋理撕裂機，資料夾名沿用），工具對外名稱是「**南瓜拓印工具 · Pumpkin Imprint**」（v2.3.1 起顯示在頂欄、`<title>`、導覽卡、教學面板）。要換名改這四處＋README、SKILL。
 
 ### 核心鐵則
 
@@ -398,7 +422,7 @@ flowchart LR
 2. 改演算法**只動 Worker 段**；加參數只加 `data-p` 輸入框＋`DEFAULTS`，綁定、復原、存檔會自動生效。
 3. **彎邊全部 d＝0 時必須走 v2.2 原本的純透視迴圈**，輸出要和 v2.2 像素完全相同。
 4. 舊快捷鍵不能壞（滾輪縮放、Shift 平移、<kbd>Ctrl</kbd>+<kbd>F</kbd>、<kbd>S</kbd> 重算）；新快捷鍵要同步寫進教學面板「快捷鍵」分頁（每頁 ≤ 8 行）和 SKILL.md。
-5. **去敏**：工具裡只出現「創作者：南瓜」和公司 Logo；範例圖必須程式產生，不放真照片、真人全名、帳號。
+5. **去敏**：工具裡的文字只出現「創作者：南瓜」和公司 Logo。範例只用南瓜提供的兩張 AI 生成示意圖（Game Boy、CRT 電視，無真實品牌）；這是 PUBLIC repo，**不要換成 GG 等內部專案素材、真人作品或真實海報**，也不放真人全名、帳號。
 6. 美術照南瓜墨金美學（紙 `#F5F5F5`／墨 `#161415`／金 `#FDC302` 一畫面一顆，夜間 `#1A1819`），token 已內嵌在 `<style>` 的 `--ig-*`。
 
 ### 資料放哪
@@ -414,7 +438,7 @@ node tests/test3.js        # 多點／矩形／橢圓＋整組匯出
 node tests/algo.js         # 五種無縫法輸出圖
 ```
 
-不帶參數時測 repo 根目錄的 `index.html`。腳本裡 Chrome 路徑寫死 `C:/Program Files/Google/Chrome/Application/chrome.exe`，別台要改。**過關標準**：`test2.js`、`test3.js` 都印出 `CONSOLE ISSUES: none`（test3 有 2 條 `willReadFrequently` warning 是腳本自己讀像素造成，不算錯）。v2.3 專屬驗收 `test4.js`（A1–A7、B1、C1–C5）目前只在 PC-02 開發副本的 `_test_shots\`。最後一定要人工雙擊 `index.html`，走一遍「載入範例 → 拓印 → 排版 → 匯出」。
+不帶參數時測 repo 根目錄的 `index.html`。腳本裡 Chrome 路徑寫死 `C:/Program Files/Google/Chrome/Application/chrome.exe`，別台要改。**過關標準**：`test2.js`、`test3.js` 都印出 `CONSOLE ISSUES: none`（test3 有 2 條 `willReadFrequently` warning 是腳本自己讀像素造成，不算錯）。v2.3 專屬驗收 `node tests/test4.js`（A1–A6、B1、C1–C5 等 18 項，結果寫在 `tests/shots4/result.json`）。最後一定要人工雙擊 `index.html`，走一遍「載入範例 → 拓印 → 排版 → 匯出」。
 
 ### 改完要同步哪裡
 
@@ -426,6 +450,7 @@ node tests/algo.js         # 五種無縫法輸出圖
 - 測試要等結果穩定才讀像素：用 `isSettled(id)`（沒有排程、沒在算、全解析度），不要只等計時器，否則會讀到舊圖。
 - 彎邊吸附只在「把已彎的點拖回直線 5px 內」才生效；剛拉出來的點不吸附，否則全覽時小弧度會被吸回直線（QA 抓過）。
 - 導覽第 2 步會自動點角，任何改動都要確保四點／曲線框不會多出第 5 點（`tourDemoState` 防呆）。
+- 範例座標 `SAMPLES.gameboy.screen`、`SAMPLES.crt.screen／edges／edges2` 是**內嵌圖（縮過的版本）的像素座標**，導覽和測試都靠它；換範例圖要重新量。`loadSample(kind)` 回傳 Promise（照片要解碼）。
 - `tests/` 裡的腳本和 PC-02 開發副本 `_test_shots\` 的版本不完全一樣（`tests/` 版預設測 repo 根目錄），改測試時兩邊都看一下。
 
 ---
@@ -450,7 +475,9 @@ node tests/algo.js         # 五種無縫法輸出圖
 
 | 版本 | 日期 | 重點 |
 |---|---|---|
-| **v2.3** | 2026-10-07 | 可彎邊四點框（瓶身／桶身標籤）、右欄拓印清單、圖集縮放平移、匯出全部 ZIP、拖點 ¼ 解析度預覽、細節回復＋局部對比、像素風半格修正、新手導覽＋範例圖＋教學面板＋圖文教學；repo 升為 skill 正本 |
+| **v2.3.2** | 2026-10-07 | 範例圖換成南瓜提供的 AI 生成示意圖（Game Boy＋虛構卡帶、CRT 播 SUNSET PLAYGROUND 海報，無真實品牌），舊照片與署名全刪；導覽四角、教學文字、全部截圖跟著換 |
+| v2.3.1 | 2026-10-07 | 工具名稱「南瓜拓印工具」顯示在頂欄、標題、導覽與教學面板；範例改成兩張圖：Game Boy（平面四點）、CRT 電視（彎邊四點），導覽第 2 步自動拓 Game Boy 螢幕；程序化範例全刪；QA 第 1 輪回修（彎邊吸附、導覽防呆、圖集滾輪錨點、教學文字 10 條） |
+| v2.3 | 2026-10-07 | 可彎邊四點框（瓶身／桶身標籤）、右欄拓印清單、圖集縮放平移、匯出全部 ZIP、拖點 ¼ 解析度預覽、細節回復＋局部對比、像素風半格修正、新手導覽＋範例圖＋教學面板＋圖文教學；repo 升為 skill 正本 |
 | v2.2 | 2026-09-22 | 改名南瓜拓印；多點／矩形／橢圓框選；圖集整組 PBR 匯出＋UV JSON；alpha 全管線保留 |
 | v2.1 | 2026-09-22 | 版面改成圖集（左）＋照片（右）；無縫改選配；圖集拉角重拓；像素風 |
 | v2 | 2026-09-21 | 多拓印框、Web Worker、復原重做、四種無縫、去光影、PBR、專案存讀、墨金日夜版 |
@@ -460,6 +487,8 @@ node tests/algo.js         # 五種無縫法輸出圖
 ## 🙏 致謝與授權
 
 靈感與功能對照來自 [Puck's Texture Ripper](https://puszke.itch.io/pucks-texture-ripper) 和 [EkstrakTex](https://bagusindrayana.itch.io/ekstraktex)。本工具是獨立實作，不含對方程式碼。
+
+範例圖：南瓜提供（AI 生成示意圖，無真實品牌）。
 
 目前未指定授權。有問題或建議，開 Issue 給我們。
 
